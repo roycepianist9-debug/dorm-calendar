@@ -28,7 +28,7 @@ h2{font-size:1.02rem;margin:26px 0 8px;font-weight:680;letter-spacing:-.01em}
 .detail strong{display:block;margin:0 0 4px;font-size:1.05rem}
 .detail .who{margin:8px 0 0}
 .detail .who-h{margin:8px 0 2px;color:#a1a1aa;font-size:12px;font-weight:750;letter-spacing:.04em;text-transform:uppercase}
-button.breakdown{margin:10px 0 0;padding:6px 12px;border:1px solid #3f4654;border-radius:999px;background:#222733;color:#f4f4f5;font:inherit;font-size:14px;font-weight:700;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+button.breakdown{margin:10px 0 0;padding:6px 12px;border:1px solid #3f4654;border-radius:999px;background:#222733;color:#f4f4f5;font:inherit;font-size:14px;font-weight:700;cursor:pointer;touch-action:manipulation}
 .capnote{margin:6px 2px 0;color:#9ca3af;font-size:12px}
 h3{margin:18px 0 6px;padding:6px 10px;font-size:1rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:#1c212b;border-left:4px solid #e6a23c;border-radius:4px}
 table{border-collapse:collapse;width:100%;background:#161a22;border:1px solid #262b36;border-radius:12px}
@@ -126,28 +126,21 @@ tr:last-child td{border-bottom:none}
       group("Male", malePeople);
       group("Female", femalePeople);
     }
-    function showNames(ev) {
-      if (ev && ev.type === "touchstart" && ev.cancelable) ev.preventDefault();
+    function showNames() {
       paintNames();
       box.hidden = false;
+      btn.setAttribute("aria-pressed", "true");
     }
     function hideNames() {
       box.hidden = true;
       box.replaceChildren();
+      btn.setAttribute("aria-pressed", "false");
     }
-    btn.addEventListener("pointerdown", showNames);
-    btn.addEventListener("pointerup", hideNames);
-    btn.addEventListener("pointerleave", hideNames);
-    btn.addEventListener("pointercancel", hideNames);
-    btn.addEventListener("mousedown", showNames);
-    btn.addEventListener("mouseup", hideNames);
-    btn.addEventListener("touchstart", showNames, {passive: false});
-    btn.addEventListener("touchend", hideNames);
-    btn.addEventListener("touchcancel", hideNames);
-    btn.addEventListener("contextmenu", function (ev) { ev.preventDefault(); });
-    window.addEventListener("pointerup", hideNames);
-    window.addEventListener("mouseup", hideNames);
-    window.addEventListener("touchend", hideNames);
+    btn.setAttribute("aria-pressed", "false");
+    btn.addEventListener("click", function () {
+      if (box.hidden) showNames();
+      else hideNames();
+    });
     panel.append(heading, maleLines[0], maleLines[1], femaleLines[0], femaleLines[1], btn, box);
     Array.prototype.forEach.call(svgs, function (svg) {
       var hi = svg.querySelector("rect.hi");
