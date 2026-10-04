@@ -26,7 +26,9 @@ h2{font-size:1.02rem;margin:26px 0 8px;font-weight:680;letter-spacing:-.01em}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
 .detail{margin:14px 2px 0;background:#161a22;border:1px solid #262b36;border-radius:16px;padding:12px 14px;font-size:15px}
 .detail strong{display:block;margin:0 0 4px;font-size:1.05rem}
-.detail .who{margin:2px 0 0}
+.detail .who{margin:8px 0 0}
+.detail .who-h{margin:8px 0 2px;color:#a1a1aa;font-size:12px;font-weight:750;letter-spacing:.04em;text-transform:uppercase}
+button.breakdown{margin:10px 0 0;padding:6px 12px;border:1px solid #3f4654;border-radius:999px;background:#222733;color:#f4f4f5;font:inherit;font-size:14px;font-weight:700;cursor:pointer;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 .capnote{margin:6px 2px 0;color:#9ca3af;font-size:12px}
 h3{margin:18px 0 6px;padding:6px 10px;font-size:1rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:#1c212b;border-left:4px solid #e6a23c;border-radius:4px}
 table{border-collapse:collapse;width:100%;background:#161a22;border:1px solid #262b36;border-radius:12px}
@@ -82,22 +84,71 @@ tr:last-child td{border-bottom:none}
     }
     var maleLines = line(male, "Male"), femaleLines = line(female, "Female");
     var srcName = {C:"Cash", A:"Airbnb", P:"Booking pianist9", R:"Booking royceb", G:"Agoda"};
-    function whoLines(groups) {
-      var nodes = [];
+    function people(groups) {
+      var lines = [];
       (groups || []).forEach(function (g) {
         if (!g || !g[1] || !g[1].length) return;
-        var div = document.createElement("div");
-        div.className = "who";
-        div.textContent = (srcName[g[0]] || g[0]) + ": " + g[1].join(", ");
-        nodes.push(div);
+        var src = srcName[g[0]] || g[0];
+        g[1].forEach(function (name) {
+          if (!name) return;
+          lines.push(name + " - " + src);
+        });
       });
-      return nodes;
+      return lines;
     }
     var who = (rows[i].w || [[], []]);
-    panel.append(heading, maleLines[0], maleLines[1]);
-    whoLines(who[0]).forEach(function (n) { panel.appendChild(n); });
-    panel.append(femaleLines[0], femaleLines[1]);
-    whoLines(who[1]).forEach(function (n) { panel.appendChild(n); });
+    var malePeople = people(who[0]);
+    var femalePeople = people(who[1]);
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "breakdown";
+    btn.textContent = "Breakdown";
+    var box = document.createElement("div");
+    box.className = "who";
+    box.hidden = true;
+    function paintNames() {
+      box.replaceChildren();
+      var both = malePeople.length && femalePeople.length;
+      function group(title, lines) {
+        if (!lines.length) return;
+        if (both) {
+          var h = document.createElement("div");
+          h.className = "who-h";
+          h.textContent = title;
+          box.appendChild(h);
+        }
+        lines.forEach(function (text) {
+          var row = document.createElement("div");
+          row.textContent = text;
+          box.appendChild(row);
+        });
+      }
+      group("Male", malePeople);
+      group("Female", femalePeople);
+    }
+    function showNames(ev) {
+      if (ev && ev.type === "touchstart" && ev.cancelable) ev.preventDefault();
+      paintNames();
+      box.hidden = false;
+    }
+    function hideNames() {
+      box.hidden = true;
+      box.replaceChildren();
+    }
+    btn.addEventListener("pointerdown", showNames);
+    btn.addEventListener("pointerup", hideNames);
+    btn.addEventListener("pointerleave", hideNames);
+    btn.addEventListener("pointercancel", hideNames);
+    btn.addEventListener("mousedown", showNames);
+    btn.addEventListener("mouseup", hideNames);
+    btn.addEventListener("touchstart", showNames, {passive: false});
+    btn.addEventListener("touchend", hideNames);
+    btn.addEventListener("touchcancel", hideNames);
+    btn.addEventListener("contextmenu", function (ev) { ev.preventDefault(); });
+    window.addEventListener("pointerup", hideNames);
+    window.addEventListener("mouseup", hideNames);
+    window.addEventListener("touchend", hideNames);
+    panel.append(heading, maleLines[0], maleLines[1], femaleLines[0], femaleLines[1], btn, box);
     Array.prototype.forEach.call(svgs, function (svg) {
       var hi = svg.querySelector("rect.hi");
       if (!hi) return;
