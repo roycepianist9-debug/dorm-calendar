@@ -1,1 +1,50 @@
-$file:/workspace/current-index.html
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="120">
+<title>Who is in</title>
+<style>
+:root{color-scheme:dark}
+body{margin:0;background:#0c0e12;color:#f4f4f5;font:16px/1.45 system-ui,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:18px 16px 72px}
+h1{font-size:1.15rem;margin:0 0 6px}
+.asof{margin:0 0 4px;font-size:15px}
+.meta{margin:0 0 16px;color:#9ca3af;font-size:13px}
+.tonight{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{background:#161a22;border:1px solid #262b36;border-radius:16px;padding:14px}
+.card.male{box-shadow:inset 3px 0 0 #3b82f6}
+.card.female{box-shadow:inset 3px 0 0 #f97316}
+.k{margin:0;color:#a1a1aa;font-size:13px;font-weight:650}
+.big{margin:8px 0 2px;font-size:clamp(32px,10vw,46px);font-weight:750}
+.open{margin:6px 0 0;font-weight:700;color:#4ade80}
+.open.neg{color:#f87171}
+h2{margin:26px 0 8px}
+table{border-collapse:collapse;width:100%;background:#161a22;border:1px solid #262b36}
+th,td{border-bottom:1px solid #262b36;padding:7px 8px;text-align:left;font-size:14px}
+.occ{font-size:13px;color:#e4e4e7;line-height:1.55}
+.ok{color:#4ade80}
+</style></head><body><div class="wrap">
+<h1>Who is in</h1>
+<p class="asof"><strong>As of 08:37 Paris, 14:37 Shanghai (2026-10-05).</strong></p>
+<p class="meta">Cash + Airbnb + Booking + <span class="ok">Agoda</span>. Crossed-out Agoda names are not counted.</p>
+<div class="tonight">
+<section class="card male"><p class="k">Male tonight</p><p class="big" id="male-tonight">19 <span style="font-size:.46em;color:#a1a1aa">/ 23</span></p><p class="open">4 open</p></section>
+<section class="card female"><p class="k">Female tonight</p><p class="big" id="female-tonight">10 <span style="font-size:.46em;color:#a1a1aa">/ 8</span></p><p class="open neg">-2 open</p></section>
+</div>
+<h2>Agoda (male dorm) — booked</h2>
+<table><thead><tr><th>Who</th><th>In</th><th>Out</th></tr></thead><tbody>
+<tr><td>Zacharia Assoumani</td><td>10-06</td><td>10-07</td></tr><tr><td>IMFURAYACU JEAN LUC</td><td>10-10</td><td>10-23</td></tr><tr><td>Aravind Koolagurki Thimmarayappa</td><td>10-13</td><td>10-15</td></tr><tr><td>Daniel Zhang Sheng Paw</td><td>10-14</td><td>10-17</td></tr><tr><td>Aravind Koolagurki Thimmarayappa</td><td>10-18</td><td>10-20</td></tr><tr><td>Muhammad Zameer Khan</td><td>10-20</td><td>10-22</td></tr><tr><td>Ngango Alain</td><td>10-27</td><td>11-06</td></tr>
+</tbody></table>
+<h2>Male used on Agoda nights</h2>
+<p class="occ">10-06: 19 used / 4 open (Zacharia)<br>
+10-10…12: 14–17 used (IMFURAYACU)<br>
+10-13: 20 used / 3 open (IMFURAYACU + Aravind)<br>
+10-14: 18 used / 5 open (+ Daniel) — peak Agoda stack<br>
+10-15…16: 13 used (IMFURAYACU + Daniel)<br>
+10-17: 14 used (IMFURAYACU)<br>
+10-18…19: 12–13 used (IMFURAYACU + Aravind)<br>
+10-20…21: 12–10 used (IMFURAYACU + Muhammad)<br>
+10-22: 8 used (IMFURAYACU)<br>
+10-27…11-04: 8→4 used (Ngango)</p>
+<p class="meta">Skipped (do not come): Denys Chymilin; fateh chabane.</p>
+<p class="meta">Page kept up with Agoda. Full bar chart stays in the local rebuild.</p>
+</div></body></html>
