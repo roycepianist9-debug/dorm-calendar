@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Assemble full index.html from base64 parts
+      - name: Assemble full index.html from gzip+base64 parts
         run: |
           set -euo pipefail
-          cat fragments/index.*.b64 | base64 -d > index.html
+          cat fragments/index.*.b64 | base64 -d | gunzip > index.html
           python3 - <<'PY'
           from pathlib import Path
           h = Path("index.html").read_text(encoding="utf-8")
@@ -35,5 +35,5 @@ jobs:
             echo "No index change"
             exit 0
           fi
-          git commit -m "Restore full dorm calendar with Agoda male stays"
+          git commit -m "Restore full dorm calendar from versioned LAST_GOOD"
           git push
