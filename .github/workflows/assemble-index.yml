@@ -1,0 +1,39 @@
+name: Assemble dorm calendar index
+on:
+  push:
+    paths:
+      - "fragments/**"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble full index.html
+        run: |
+          set -euo pipefail
+          cat fragments/index.*.part > index.html
+          python3 - <<'PY'
+          from pathlib import Path
+          h = Path("index.html").read_text(encoding="utf-8")
+          assert h.startswith("<!DOCTYPE html>"), h[:40]
+          for m in ["Keti", "IMFURAYACU", "Ngango", "Muhammad", "Breakdown", "chart-data"]:
+              assert m in h, m
+          for bad in ["fateh", "Denys"]:
+              assert bad not in h, bad
+          print("size", len(h.encode()))
+          PY
+      - name: Commit assembled index
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No index change"
+            exit 0
+          fi
+          git commit -m "Restore full dorm calendar with Agoda male stays"
+          git push
