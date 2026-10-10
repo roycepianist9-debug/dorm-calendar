@@ -1,1 +1,1 @@
-am = max(0,22-booked) rule 689f77b773abf35e4cbac3c78709da450b17d09ca5df2b5b3fc2ac55fdceed0a 2026-10-10T05:23Z
+Simon Ouziel HMJ9SZHMM2 b9d780c4619aaa60717fcebc0a6f2161d7c4125e9e095a8ec763fd203df79ee7 2026-10-10T07:05Z
