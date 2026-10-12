@@ -6,6 +6,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+concurrency:
+  group: assemble-index
+  cancel-in-progress: false
 jobs:
   assemble:
     runs-on: ubuntu-latest
@@ -14,6 +17,7 @@ jobs:
       - name: Assemble full index.html from gzip+base64 parts
         run: |
           set -euo pipefail
+          cp index.html /tmp/prev-index.html || true
           cat fragments/index.*.b64 | base64 -d | gunzip > index.html
           python3 - <<'PY'
           from pathlib import Path
@@ -25,6 +29,26 @@ jobs:
               assert bad not in h, bad
           print("size", len(h.encode()))
           PY
+      - name: Refuse rollbacks to older calendar data
+        env:
+          HEAD_MSG: ${{ github.event.head_commit.message }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os, re
+          from pathlib import Path
+          rx = re.compile(r'<meta name="calendar-version" content="([0-9TZ:-]+)">')
+          new = rx.search(Path("index.html").read_text(encoding="utf-8"))
+          p = Path("/tmp/prev-index.html")
+          old = rx.search(p.read_text(encoding="utf-8")) if p.exists() else None
+          allow = "[allow-rollback]" in (os.environ.get("HEAD_MSG") or "")
+          print("prev version", old and old.group(1), "new version", new and new.group(1), "allow", allow)
+          if old and not allow:
+              if not new:
+                  raise SystemExit("REFUSED: new index has no calendar-version but live has " + old.group(1) + " (looks like an old LAST_GOOD). Patch on top of live, or add [allow-rollback] to the commit message after Royce OK.")
+              if new.group(1) < old.group(1):
+                  raise SystemExit("REFUSED: new calendar-version " + new.group(1) + " is older than live " + old.group(1) + ". Patch on top of live, or add [allow-rollback] after Royce OK.")
+          PY
       - name: Commit assembled index
         run: |
           set -euo pipefail
@@ -35,5 +59,6 @@ jobs:
             echo "No index change"
             exit 0
           fi
-          git commit -m "Restore full dorm calendar from versioned LAST_GOOD"
+          V=$(grep -o 'calendar-version" content="[^"]*' index.html | cut -d'"' -f3 || true)
+          git commit -m "Assemble index.html from fragments (calendar-version ${V:-none})"
           git push
