@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta name="calendar-version" content="2026-10-14T14:00:27Z"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta name="calendar-version" content="2026-10-14T14:16:01Z"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="refresh" content="120">
 <title>Who is in</title>
 <style>
@@ -54,8 +54,8 @@ th{color:#a1a1aa;font-weight:600;font-size:12px}
 tr:last-child td{border-bottom:none}
 </style></head><body><div class="wrap">
 <h1>Who is in</h1>
-<p class="asof"><strong>As of 16:00 Paris, 22:00 Shanghai (2026-10-14).</strong></p>
-<p class="meta">Bed inventory refreshes about every 15 minutes. Last refreshed 16:00 Paris, 22:00 Shanghai (2026-10-14).</p>
+<p class="asof"><strong>As of 16:16 Paris, 22:16 Shanghai (2026-10-14).</strong></p>
+<p class="meta">Bed inventory refreshes about every 15 minutes. Last refreshed 16:16 Paris, 22:16 Shanghai (2026-10-14).</p>
 <p class="meta">Cash + Airbnb + 2 booking.com + Agoda</p>
 <div class="tonight">
 <section class="card male"><p class="k">Male tonight</p><p class="big"><span id="male-tonight">22</span> <span class="of">/ 23</span></p><p class="open"><span id="male-open">1</span> open</p></section>
@@ -434,7 +434,8 @@ tr:last-child td{border-bottom:none}
   var rows = JSON.parse(el.textContent);
   var NS = "http://www.w3.org/2000/svg";
   var MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-  var EXTRA = 13, BOTTOM = 128;
+  var EXTRA = 22, BOTTOM = 128;
+  var WD = ["S","M","T","W","T","F","S"];
   var today = "";
   try { today = new Intl.DateTimeFormat("en-CA", {timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit"}).format(new Date()); } catch (e) {}
   var todayIndex = -1;
@@ -452,8 +453,18 @@ tr:last-child td{border-bottom:none}
       var p = String(r.d || "").split("-");
       if (p.length !== 3) return;
       var yr = +p[0], mo = +p[1], dy = +p[2];
-      if (i !== 0 && dy !== 1) return;
       var x = left + i * slot;
+      var wd = document.createElementNS(NS, "text");
+      wd.setAttribute("x", String(x + slot / 2));
+      wd.setAttribute("y", String(BOTTOM + 1));
+      wd.setAttribute("text-anchor", "middle");
+      var wdi = new Date(Date.UTC(yr, mo - 1, dy)).getUTCDay();
+      wd.setAttribute("fill", (wdi === 0 || wdi === 6) ? "#fbbf24" : "#71717a");
+      wd.setAttribute("font-size", "8");
+      wd.setAttribute("class", "wd");
+      wd.textContent = WD[wdi];
+      g.appendChild(wd);
+      if (i !== 0 && dy !== 1) return;
       if (i !== 0) {
         var ln = document.createElementNS(NS, "line");
         ln.setAttribute("x1", String(x)); ln.setAttribute("x2", String(x));
@@ -463,7 +474,7 @@ tr:last-child td{border-bottom:none}
       }
       var t = document.createElementNS(NS, "text");
       t.setAttribute("x", String(x + 3));
-      t.setAttribute("y", String(BOTTOM + 9));
+      t.setAttribute("y", String(BOTTOM + 18));
       t.setAttribute("fill", "#d4d4d8");
       t.setAttribute("font-size", "10");
       t.setAttribute("font-weight", "700");
