@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta name="calendar-version" content="2026-10-18T13:14:13Z"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta name="calendar-version" content="2026-10-18T13:43:14Z"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="refresh" content="120">
 <title>Who is in</title>
 <script>window.dormGetLang=function(){var q=/[?&]lang=(fr|en)\b/.exec(location.search);if(q)return q[1];try{var s=localStorage.getItem("dormLang");if(s==="fr"||s==="en")return s;}catch(e){}return /^fr\b/i.test(navigator.language||"")?"fr":"en";};</script>
@@ -105,10 +105,39 @@ body[data-dorm] .tonight{grid-template-columns:1fr}
 .motto{margin:2px 0 6px;font-style:italic;font-size:13px;color:#a1a1aa;letter-spacing:.2px}
 .bm-rst{flex:0 0 auto;width:28px;height:28px;padding:0;border-radius:8px;border:1px solid #3f3f46;background:#18181b;color:#a1a1aa;font-size:15px;line-height:1;cursor:pointer}
 .bm-rst:active{background:#27272a}
+/* ---- next4 ---- */
+#n4-alert{margin:0 0 8px}
+.n4-al{margin:4px 0;padding:8px 12px;border-radius:12px;font-size:13.5px;line-height:1.4}
+.n4-al b{display:block;font-size:14px;margin:0 0 2px}
+.n4-al.red{background:#3b1114;border:1px solid #ef4444;color:#fecaca}
+.n4-al.amber{background:#33270a;border:1px solid #f59e0b;color:#fde68a}
+.n4-al.ok{background:#0f2417;border:1px solid #166534;color:#86efac;padding:5px 12px;font-size:12.5px}
+.n4-al ul{margin:2px 0 0;padding:0 0 0 1.2em}
+.n4-cash{margin:8px 0 0;padding:6px 0 0;border-top:1px solid #262b36;font-size:13px;color:#d4d4d8}
+.n4-cash .v{font-weight:800;font-size:15px;font-variant-numeric:tabular-nums}
+.n4-yes{color:#4ade80;font-weight:800}.n4-no{color:#f87171;font-weight:800}
+.n4-tonight{margin:14px 0 0;box-shadow:inset 3px 0 0 #22c55e}
+.n4-side{margin:8px 0 0;padding:8px 0 0;border-top:1px solid #262b36}
+.n4-side:first-of-type{border-top:none;padding-top:0}
+.n4-side h4{margin:0 0 4px;font-size:14px;font-weight:800}
+.n4-side.male h4{color:#93c5fd}.n4-side.female h4{color:#fdba74}
+.n4-li{display:flex;align-items:center;gap:8px;padding:3px 0;font-size:14px;flex-wrap:wrap}
+.n4-li .nm{flex:1 1 140px;min-width:0}
+.n4-li .sr{color:#9ca3af;font-size:12px}
+.n4-b{padding:4px 10px;border:1px solid #3f4654;border-radius:999px;background:#222733;color:#f4f4f5;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;touch-action:manipulation}
+.n4-b[aria-pressed=true]{background:#14532d;border-color:#22c55e;color:#bbf7d0}
+.n4-ns{padding:1px 8px;border-radius:999px;background:#7f1d1d;color:#fecaca;font-size:12px;font-weight:800}
+.n4-acts{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 0}
+.n4-done{border-color:#a78bfa;color:#ddd6fe}
+#n4-clean{margin:10px 0 0;padding:8px 0 0;border-top:1px solid #262b36}
+#n4-clean h4{margin:0 0 4px;font-size:14px;font-weight:800;color:#c4b5fd}
+.n4-sub{margin:6px 0 2px;font-size:11px;font-weight:750;letter-spacing:.04em;text-transform:uppercase;color:#71717a}
+.n4-msg{font-size:12px;color:#4ade80;margin-left:6px}
 </style></head><body><div class="wrap">
 <div class="langsw" id="lang-sw" role="group" aria-label="Language"><button type="button" data-lang="fr">FR</button><button type="button" data-lang="en">EN</button></div>
 <div class="langsw" id="dorm-sw" role="group" aria-label="Dorm"><button type="button" data-dorm="f">Female</button><button type="button" data-dorm="m">Male</button></div>
 <p class="motto">“If everyone chips in, we’ll get there.”</p>
+<div id="n4-alert" aria-live="polite"></div>
 <h1>Who is in</h1>
 <p class="asof"><strong>As of 15:14 Paris, 21:14 Shanghai (2026-10-18).</strong></p>
 <p class="meta">Bed inventory refreshes about every 15 minutes. Last refreshed 14:47 Paris, 20:47 Shanghai (2026-10-18).</p>
@@ -117,7 +146,8 @@ body[data-dorm] .tonight{grid-template-columns:1fr}
 <section class="card male"><p class="k">Male tonight</p><p class="big"><span id="male-tonight">19</span> <span class="of">/ 23</span></p><p class="open"><span id="male-open">4</span> open</p></section>
 <section class="card female"><p class="k">Female tonight</p><p class="big"><span id="female-tonight">8</span> <span class="of">/ 8</span></p><p class="open"><span id="female-open">0</span> open</p></section>
 </div>
-<section id="linens" class="detail linens" aria-live="polite"><div class="lin-top"><p class="lin-t">Linens to change: <span class="n" id="lin-total">–</span></p><div class="lin-nav"><button type="button" id="lin-prev" aria-label="Previous day">‹</button><span class="lin-day" id="lin-day"></span><button type="button" id="lin-next" aria-label="Next day">›</button><button type="button" id="lin-today">Today</button></div></div><div id="lin-body"><p class="lin-none">Loading…</p></div><p class="capnote" style="margin-top:8px">Out = guest in the night before and not tonight (one bed to strip and remake). In = arriving tonight. Tap a bar to change day.</p></section>
+<section id="n4-tonight" class="detail n4-tonight" aria-live="polite"></section>
+<section id="linens" class="detail linens" aria-live="polite"><div class="lin-top"><p class="lin-t">Linens to change: <span class="n" id="lin-total">–</span></p><div class="lin-nav"><button type="button" id="lin-prev" aria-label="Previous day">‹</button><span class="lin-day" id="lin-day"></span><button type="button" id="lin-next" aria-label="Next day">›</button><button type="button" id="lin-today">Today</button></div></div><div id="lin-body"><p class="lin-none">Loading…</p></div><div id="n4-clean"></div><p class="capnote" style="margin-top:8px">Out = guest in the night before and not tonight (one bed to strip and remake). In = arriving tonight. Tap a bar to change day.</p></section>
 <div id="bedmaps"></div>
 <h2>Male, beds used per night</h2>
 <div class="chart"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2944 128" width="2944" height="128" role="img" aria-label="Male beds per night, 5 Oct through 27 Feb, cap 23" data-left="22" data-slot="20" data-n="146"><line x1="22" y1="106" x2="2942" y2="106" stroke="#3f4654"/><line x1="22" y1="6" x2="2942" y2="6" stroke="#e4e4e7" stroke-dasharray="4 3"/><text x="20" y="9" text-anchor="end" fill="#a1a1aa" font-size="11">23</text><text x="20" y="106" text-anchor="end" fill="#a1a1aa" font-size="11">0</text><rect class="hi" x="0" y="0" width="20" height="128" fill="none" stroke="#f4f4f5" visibility="hidden"/><path fill="#3b82f6" d="M26,6h12v100h-12zM46,6h12v100h-12zM66,6h12v100h-12zM86,10h12v96h-12zM106,6h12v100h-12zM126,6h12v100h-12zM146,6h12v100h-12zM166,6h12v100h-12zM186,6h12v100h-12zM206,10h12v96h-12zM226,19h12v87h-12zM246,28h12v78h-12zM266,19h12v87h-12zM286,28h12v78h-12zM306,15h12v91h-12zM326,10h12v96h-12zM346,28h12v78h-12zM366,32h12v74h-12zM386,63h12v43h-12zM406,63h12v43h-12zM426,58h12v48h-12zM446,54h12v52h-12zM466,54h12v52h-12zM486,54h12v52h-12zM506,63h12v43h-12zM526,76h12v30h-12zM546,80h12v26h-12zM566,84h12v22h-12zM586,80h12v26h-12zM606,76h12v30h-12zM626,76h12v30h-12zM646,84h12v22h-12zM666,93h12v13h-12zM686,93h12v13h-12zM706,89h12v17h-12zM726,84h12v22h-12zM746,84h12v22h-12zM766,84h12v22h-12zM786,84h12v22h-12zM806,89h12v17h-12zM826,89h12v17h-12zM846,89h12v17h-12zM866,84h12v22h-12zM886,84h12v22h-12zM906,84h12v22h-12zM926,89h12v17h-12zM946,84h12v22h-12zM966,84h12v22h-12zM986,84h12v22h-12zM1006,89h12v17h-12zM1026,89h12v17h-12zM1046,89h12v17h-12zM1066,89h12v17h-12zM1086,89h12v17h-12zM1106,89h12v17h-12zM1126,89h12v17h-12zM1146,89h12v17h-12zM1166,89h12v17h-12zM1186,89h12v17h-12zM1206,89h12v17h-12zM1226,89h12v17h-12zM1246,84h12v22h-12zM1266,80h12v26h-12zM1286,80h12v26h-12zM1306,80h12v26h-12zM1326,80h12v26h-12zM1346,76h12v30h-12zM1366,76h12v30h-12zM1386,76h12v30h-12zM1406,76h12v30h-12zM1426,80h12v26h-12zM1446,80h12v26h-12zM1466,80h12v26h-12zM1486,80h12v26h-12zM1506,80h12v26h-12zM1526,80h12v26h-12zM1546,80h12v26h-12zM1566,80h12v26h-12zM1586,80h12v26h-12zM1606,80h12v26h-12zM1626,80h12v26h-12zM1646,80h12v26h-12zM1666,80h12v26h-12zM1686,80h12v26h-12zM1706,84h12v22h-12zM1726,84h12v22h-12zM1746,80h12v26h-12zM1766,80h12v26h-12zM1786,80h12v26h-12zM1806,80h12v26h-12zM1826,80h12v26h-12zM1846,80h12v26h-12zM1866,80h12v26h-12zM1886,80h12v26h-12zM1906,80h12v26h-12zM1926,80h12v26h-12zM1946,84h12v22h-12zM1966,84h12v22h-12zM1986,84h12v22h-12zM2006,84h12v22h-12zM2026,84h12v22h-12zM2046,80h12v26h-12zM2066,84h12v22h-12zM2086,84h12v22h-12zM2106,84h12v22h-12zM2126,84h12v22h-12zM2146,84h12v22h-12zM2166,84h12v22h-12zM2186,84h12v22h-12zM2206,84h12v22h-12zM2226,89h12v17h-12zM2246,89h12v17h-12zM2266,89h12v17h-12zM2286,89h12v17h-12zM2306,89h12v17h-12zM2326,89h12v17h-12zM2346,89h12v17h-12zM2366,89h12v17h-12zM2386,89h12v17h-12zM2406,89h12v17h-12zM2426,89h12v17h-12zM2446,89h12v17h-12zM2466,89h12v17h-12zM2486,89h12v17h-12zM2506,89h12v17h-12zM2526,89h12v17h-12zM2546,89h12v17h-12zM2566,89h12v17h-12zM2586,89h12v17h-12zM2606,89h12v17h-12zM2626,89h12v17h-12zM2646,89h12v17h-12zM2666,89h12v17h-12zM2686,89h12v17h-12zM2706,89h12v17h-12zM2726,89h12v17h-12zM2746,89h12v17h-12zM2766,89h12v17h-12zM2786,89h12v17h-12zM2806,89h12v17h-12zM2826,89h12v17h-12zM2846,89h12v17h-12zM2866,89h12v17h-12zM2886,89h12v17h-12zM2906,89h12v17h-12zM2926,89h12v17h-12z"/><text x="32" y="60" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">23</text><text x="52" y="60" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">26</text><text x="72" y="60" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">24</text><text x="92" y="62" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">22</text><text x="112" y="60" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">23</text><text x="132" y="60" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">25</text><text x="152" y="60" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">24</text><text x="172" y="60" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">24</text><text x="192" y="60" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">26</text><text x="212" y="62" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">22</text><text x="232" y="66" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">20</text><text x="252" y="70" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">18</text><text x="272" y="66" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">20</text><text x="292" y="70" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">18</text><text x="312" y="63" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">21</text><text x="332" y="61" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">22</text><text x="352" y="70" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">18</text><text x="372" y="73" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">17</text><text x="392" y="88" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">10</text><text x="412" y="88" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">10</text><text x="432" y="86" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">11</text><text x="452" y="83" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">12</text><text x="472" y="83" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">12</text><text x="492" y="83" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">12</text><text x="512" y="88" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">10</text><text x="532" y="94" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">7</text><text x="552" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="572" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="592" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="612" y="94" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">7</text><text x="632" y="94" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">7</text><text x="652" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="672" y="91" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" stroke="#0c0e12" stroke-width="2" paint-order="stroke" pointer-events="none">3</text><text x="692" y="91" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" stroke="#0c0e12" stroke-width="2" paint-order="stroke" pointer-events="none">3</text><text x="712" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="732" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="752" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="772" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="792" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="812" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="832" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="852" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="872" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="892" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="912" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="932" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="952" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="972" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="992" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="1012" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="1032" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="1052" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="1072" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="1092" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="1112" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="1132" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="1152" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="1172" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="1192" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="1212" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="1232" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="1252" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="1272" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1292" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1312" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1332" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1352" y="94" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">7</text><text x="1372" y="94" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">7</text><text x="1392" y="94" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">7</text><text x="1412" y="94" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">7</text><text x="1432" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1452" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1472" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1492" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1512" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1532" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1552" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1572" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1592" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1612" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1632" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1652" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1672" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1692" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1712" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="1732" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="1752" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1772" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1792" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1812" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1832" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1852" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1872" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1892" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1912" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1932" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="1952" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="1972" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="1992" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="2012" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="2032" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="2052" y="96" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">6</text><text x="2072" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="2092" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="2112" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="2132" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="2152" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="2172" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="2192" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="2212" y="99" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">5</text><text x="2232" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2252" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2272" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2292" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2312" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2332" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2352" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2372" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2392" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2412" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2432" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2452" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2472" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2492" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2512" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2532" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2552" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2572" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2592" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2612" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2632" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2652" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2672" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2692" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2712" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2732" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2752" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2772" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2792" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2812" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2832" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2852" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2872" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2892" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2912" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text x="2932" y="101" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" pointer-events="none">4</text><text fill="#a1a1aa" font-size="9"><tspan x="32" y="118">5</tspan><tspan x="52" y="118">6</tspan><tspan x="72" y="118">7</tspan><tspan x="92" y="118">8</tspan><tspan x="112" y="118">9</tspan><tspan x="132" y="118">10</tspan><tspan x="152" y="118">11</tspan><tspan x="172" y="118">12</tspan><tspan x="192" y="118">13</tspan><tspan x="212" y="118">14</tspan><tspan x="232" y="118">15</tspan><tspan x="252" y="118">16</tspan><tspan x="272" y="118">17</tspan><tspan x="292" y="118">18</tspan><tspan x="312" y="118">19</tspan><tspan x="332" y="118">20</tspan><tspan x="352" y="118">21</tspan><tspan x="372" y="118">22</tspan><tspan x="392" y="118">23</tspan><tspan x="412" y="118">24</tspan><tspan x="432" y="118">25</tspan><tspan x="452" y="118">26</tspan><tspan x="472" y="118">27</tspan><tspan x="492" y="118">28</tspan><tspan x="512" y="118">29</tspan><tspan x="532" y="118">30</tspan><tspan x="552" y="118">31</tspan><tspan x="572" y="118">1</tspan><tspan x="592" y="118">2</tspan><tspan x="612" y="118">3</tspan><tspan x="632" y="118">4</tspan><tspan x="652" y="118">5</tspan><tspan x="672" y="118">6</tspan><tspan x="692" y="118">7</tspan><tspan x="712" y="118">8</tspan><tspan x="732" y="118">9</tspan><tspan x="752" y="118">10</tspan><tspan x="772" y="118">11</tspan><tspan x="792" y="118">12</tspan><tspan x="812" y="118">13</tspan><tspan x="832" y="118">14</tspan><tspan x="852" y="118">15</tspan><tspan x="872" y="118">16</tspan><tspan x="892" y="118">17</tspan><tspan x="912" y="118">18</tspan><tspan x="932" y="118">19</tspan><tspan x="952" y="118">20</tspan><tspan x="972" y="118">21</tspan><tspan x="992" y="118">22</tspan><tspan x="1012" y="118">23</tspan><tspan x="1032" y="118">24</tspan><tspan x="1052" y="118">25</tspan><tspan x="1072" y="118">26</tspan><tspan x="1092" y="118">27</tspan><tspan x="1112" y="118">28</tspan><tspan x="1132" y="118">29</tspan><tspan x="1152" y="118">30</tspan><tspan x="1172" y="118">1</tspan><tspan x="1192" y="118">2</tspan><tspan x="1212" y="118">3</tspan><tspan x="1232" y="118">4</tspan><tspan x="1252" y="118">5</tspan><tspan x="1272" y="118">6</tspan><tspan x="1292" y="118">7</tspan><tspan x="1312" y="118">8</tspan><tspan x="1332" y="118">9</tspan><tspan x="1352" y="118">10</tspan><tspan x="1372" y="118">11</tspan><tspan x="1392" y="118">12</tspan><tspan x="1412" y="118">13</tspan><tspan x="1432" y="118">14</tspan><tspan x="1452" y="118">15</tspan><tspan x="1472" y="118">16</tspan><tspan x="1492" y="118">17</tspan><tspan x="1512" y="118">18</tspan><tspan x="1532" y="118">19</tspan><tspan x="1552" y="118">20</tspan><tspan x="1572" y="118">21</tspan><tspan x="1592" y="118">22</tspan><tspan x="1612" y="118">23</tspan><tspan x="1632" y="118">24</tspan><tspan x="1652" y="118">25</tspan><tspan x="1672" y="118">26</tspan><tspan x="1692" y="118">27</tspan><tspan x="1712" y="118">28</tspan><tspan x="1732" y="118">29</tspan><tspan x="1752" y="118">30</tspan><tspan x="1772" y="118">31</tspan><tspan x="1792" y="118">1</tspan><tspan x="1812" y="118">2</tspan><tspan x="1832" y="118">3</tspan><tspan x="1852" y="118">4</tspan><tspan x="1872" y="118">5</tspan><tspan x="1892" y="118">6</tspan><tspan x="1912" y="118">7</tspan><tspan x="1932" y="118">8</tspan><tspan x="1952" y="118">9</tspan><tspan x="1972" y="118">10</tspan><tspan x="1992" y="118">11</tspan><tspan x="2012" y="118">12</tspan><tspan x="2032" y="118">13</tspan><tspan x="2052" y="118">14</tspan><tspan x="2072" y="118">15</tspan><tspan x="2092" y="118">16</tspan><tspan x="2112" y="118">17</tspan><tspan x="2132" y="118">18</tspan><tspan x="2152" y="118">19</tspan><tspan x="2172" y="118">20</tspan><tspan x="2192" y="118">21</tspan><tspan x="2212" y="118">22</tspan><tspan x="2232" y="118">23</tspan><tspan x="2252" y="118">24</tspan><tspan x="2272" y="118">25</tspan><tspan x="2292" y="118">26</tspan><tspan x="2312" y="118">27</tspan><tspan x="2332" y="118">28</tspan><tspan x="2352" y="118">29</tspan><tspan x="2372" y="118">30</tspan><tspan x="2392" y="118">31</tspan><tspan x="2412" y="118">1</tspan><tspan x="2432" y="118">2</tspan><tspan x="2452" y="118">3</tspan><tspan x="2472" y="118">4</tspan><tspan x="2492" y="118">5</tspan><tspan x="2512" y="118">6</tspan><tspan x="2532" y="118">7</tspan><tspan x="2552" y="118">8</tspan><tspan x="2572" y="118">9</tspan><tspan x="2592" y="118">10</tspan><tspan x="2612" y="118">11</tspan><tspan x="2632" y="118">12</tspan><tspan x="2652" y="118">13</tspan><tspan x="2672" y="118">14</tspan><tspan x="2692" y="118">15</tspan><tspan x="2712" y="118">16</tspan><tspan x="2732" y="118">17</tspan><tspan x="2752" y="118">18</tspan><tspan x="2772" y="118">19</tspan><tspan x="2792" y="118">20</tspan><tspan x="2812" y="118">21</tspan><tspan x="2832" y="118">22</tspan><tspan x="2852" y="118">23</tspan><tspan x="2872" y="118">24</tspan><tspan x="2892" y="118">25</tspan><tspan x="2912" y="118">26</tspan><tspan x="2932" y="118">27</tspan></text></svg></div>
@@ -703,10 +733,10 @@ body[data-dorm] .tonight{grid-template-columns:1fr}
   var T = {
     en: {lv: ["Bottom", "Middle", "Top"], single: "Single", ci: "Check-in", co: "Check-out", flag: "Linen change on:", sum1: "linen to change", sumN: "linens to change", sum0: "No linen change", front: "Front view (from the room)", name: "Name", window: "Window", door: "Door", copy: "Copy / Paste layout",
          copyBtn: "Copy", apply: "Apply pasted", close: "Close", copied: "Copied", applied: "Layout loaded", bad: "Not a valid layout",
-         tap: "Tap a dot to change status.", reset: "Clear room", rst: "Reset bed", rstQ: "Reset bed %s? Name, source, dates and status will be cleared."},
+         tap: "Tap a dot to change status.", reset: "Clear room", rst: "Reset bed", rstQ: "Reset bed %s? Name, source, dates and status will be cleared.", plus1: "+1 night", done: "Linens done \u2713"},
     fr: {lv: ["Bas", "Milieu", "Haut"], single: "Simple", ci: "Arriv\u00e9e", co: "D\u00e9part", flag: "Changer les draps le :", sum1: "drap \u00e0 changer", sumN: "draps \u00e0 changer", sum0: "Aucun drap \u00e0 changer", front: "Vue de face (depuis la pièce)", name: "Nom", window: "Fen\u00eatre", door: "Porte", copy: "Copier / Coller la disposition",
          copyBtn: "Copier", apply: "Appliquer", close: "Fermer", copied: "Copi\u00e9", applied: "Disposition charg\u00e9e", bad: "Disposition invalide",
-         tap: "Touchez un point pour changer le statut.", reset: "Vider la chambre", rst: "R\u00e9initialiser", rstQ: "R\u00e9initialiser le lit %s ? Nom, source, dates et statut seront effac\u00e9s."}
+         tap: "Touchez un point pour changer le statut.", reset: "Vider la chambre", rst: "R\u00e9initialiser", rstQ: "R\u00e9initialiser le lit %s ? Nom, source, dates et statut seront effac\u00e9s.", plus1: "+1 nuit", done: "Draps faits \u2713"}
   };
   var KEY = "dormBedMap.v1", LKEY = "dormLang";
   function lang() { var q = /[?&]lang=(fr|en)/.exec(location.search); if (q) return q[1]; if (window.dormGetLang) return window.dormGetLang(); try { return localStorage.getItem(LKEY) === "fr" ? "fr" : "en"; } catch (e) { return "en"; } }
@@ -738,7 +768,7 @@ body[data-dorm] .tonight{grid-template-columns:1fr}
        s: "free" | "in" | "away" | "chk"; n: name; src: "A" Airbnb | "B" Booking | "C" Cash | "G" Agoda (shown "Ag") | "" unknown
        ci / co: check-in / check-out "YYYY-MM-DD" (Paris); t: ms timestamp of the last edit (newest wins vs built-in data).
      clean() drops unknown fields and moves old per-room keys (R0-k, R1-k, R2-k) to the global numbers. */
-  var OLDK = {"m-r0": ["R0-", 0], "m-r1": ["R1-", 10], "m-r2": ["R2-", 20]}, FIELDS = ["s", "n", "src", "ci", "co", "t"];
+  var OLDK = {"m-r0": ["R0-", 0], "m-r1": ["R1-", 10], "m-r2": ["R2-", 20]}, FIELDS = ["s", "n", "src", "ci", "co", "t", "ld"];
   function clean(s) {
     for (var r in s) {
       if (!s[r] || typeof s[r] !== "object") { delete s[r]; continue; }
@@ -755,6 +785,7 @@ body[data-dorm] .tonight{grid-template-columns:1fr}
   }
   function needsLinen(v) {
     if (!v || !v.co) return false;
+    if (v.ld && v.ld === v.co) return false; /* next4: Linens Done ✓ for this check-out */
     var co = parisMs(v.co, CO_H);
     if (!(NOW >= co - DAY)) return false;
     return true;
@@ -826,6 +857,16 @@ body[data-dorm] .tonight{grid-template-columns:1fr}
     return s;
   }
   var state = mergeSeed(clean(load()));
+  function addDay(d, n) { var p = String(d).split("-"); var x = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2] + n)); return x.toISOString().slice(0, 10); }
+  function rollover() {
+    var ch = false;
+    for (var r in state) for (var b in state[r]) {
+      var v = state[r][b]; if (!v || !v.co || (v.s !== "in" && v.s !== "away") || v.ld === v.co) continue;
+      var ro = parisMs(v.co, CO_H); if (!(NOW >= ro) || v.t >= ro) continue;
+      v.s = "chk"; v.t = ro; ch = true;
+    }
+    if (ch) save(state);
+  }
   var TD = parisDay(NOW), D = function (n) { return parisDay(NOW, n); };
   function bedsOf(room) {
     var out = [], n = 0;
@@ -949,6 +990,7 @@ body[data-dorm] .tonight{grid-template-columns:1fr}
     b.addEventListener("click", function () { try { localStorage.setItem(DKEY, b.getAttribute("data-dorm")); } catch (e) {} render(); });
   });
   function render() {
+    rollover();
     var L = lang(); host.replaceChildren();
     var only = /[?&]room=([\w-]+)/.exec(location.search), DM = dorm(); paintDorm(L, DM);
     ROOMS.forEach(function (room) {
@@ -1007,6 +1049,18 @@ body[data-dorm] .tonight{grid-template-columns:1fr}
             lb.appendChild(inp); dts.appendChild(lb);
           });
           wrapB.appendChild(dts);
+          var acts = document.createElement("div"); acts.className = "n4-acts";
+          var p1 = document.createElement("button"); p1.type = "button"; p1.className = "n4-b"; p1.textContent = T[L].plus1;
+          p1.setAttribute("aria-label", lbl(room, bed.id) + " " + T[L].plus1);
+          p1.addEventListener("click", function () { var v = st(room, bed.id); v.co = addDay(v.co || TD, 1); if (v.s === "chk") v.s = "in"; setSt(room, bed.id, v); render(); });
+          acts.appendChild(p1);
+          if (needsLinen(cur) || cur.s === "chk") {
+            var dn = document.createElement("button"); dn.type = "button"; dn.className = "n4-b n4-done"; dn.textContent = "\uD83E\uDDFA " + T[L].done;
+            dn.setAttribute("aria-label", lbl(room, bed.id) + " " + T[L].done);
+            dn.addEventListener("click", function () { linenDone(room, bed.id); });
+            acts.appendChild(dn);
+          }
+          wrapB.appendChild(acts);
           if (needsLinen(cur)) { var fb = document.createElement("span"); fb.className = "bm-flag"; fb.textContent = "\uD83E\uDDFA " + T[L].flag + " " + ddmm(cur.co); wrapB.appendChild(fb); }
           card.appendChild(wrapB);
         });
@@ -1039,10 +1093,219 @@ body[data-dorm] .tonight{grid-template-columns:1fr}
     });
     bar.append(cBtn, aBtn, msg); io.append(ta, bar); tools.appendChild(ioBtn);
     host.append(tools, io);
+    if (window.dormN4Render) try { window.dormN4Render(); } catch (e) { if (window.console) console.error(e); }
   }
+  function linenDone(room, id) { var v = st(room, id); if (v.co) v.ld = v.co; if (v.s === "chk") v.s = "free"; setSt(room, id, v); render(); }
+  window.dormBedAPI = {ROOMS: ROOMS, STATUS: STATUS, bedsOf: bedsOf, st: st, setSt: setSt, needsLinen: needsLinen, lbl: lbl, sOf: sOf,
+    parisMs: parisMs, parisDay: parisDay, addDay: addDay, ddmm: ddmm, lang: lang, linenDone: linenDone, NOW: NOW, TD: TD, render: function () { render(); }};
   render();
   window.dormBedMapRender = render;
 })();
+</script><script id="next4-js">
+(function () {
+  /* ===== next4 (2026-10-18): overbooking banner, tonight's arrivals / check-outs with Arrived ✓ and No-show?,
+     cleaning list (Linens done ✓), auto-place, cash beds left tonight. Labels FR/EN; data shared by both languages.
+     Arrived taps live on this phone only (localStorage "dormArrived.v1"), like bed edits. ===== */
+  var A = window.dormBedAPI, el = document.getElementById("chart-data");
+  if (!A || !el) return;
+  var rows = JSON.parse(el.textContent);
+  var MCAP = 23, MSAFE = 22, FCAP = 8, NS_H = 6; /* before 06:00 Paris, "tonight" is still the night that started yesterday */
+  var AKEY = "dormArrived.v1";
+  var T = {
+    en: {ob: "Overbooking ahead", near: "Men at the safety line (22+)", ok: "No overbooking ahead", men: "Men", women: "Women",
+         cash: "Cash beds left tonight", yes: "Yes", no: "No", tn: "Tonight", arr: "Arriving", out: "Leaving", none: "None",
+         arrived: "Arrived \u2713", mark: "Arrived?", ns: "No-show?", nsLast: "Last night, not marked arrived", 
+         place: "Auto-place in free beds", placeQ: "Put these guests in free beds?\n", placeNone: "Everyone tonight already has a bed.",
+         placeFull: "No free bed for: ", placed: "Placed: ", grace: "Not marked arrived by midnight = No-show?",
+         clean: "Cleaning list", cleanNone: "No bed to remake", bed: "Bed", chk: "to check", lin: "linen",
+         c: ": ", src: {C: "Cash", A: "Airbnb", P: "Booking", R: "Booking", G: "Agoda"}},
+    fr: {ob: "Surr\u00e9servation \u00e0 venir", near: "Hommes \u00e0 la ligne de s\u00e9curit\u00e9 (22+)", ok: "Aucune surr\u00e9servation \u00e0 venir", men: "Hommes", women: "Femmes",
+         cash: "Lits esp\u00e8ces libres ce soir", yes: "Oui", no: "Non", tn: "Ce soir", arr: "Arriv\u00e9es", out: "D\u00e9parts", none: "Aucun",
+         arrived: "Arriv\u00e9 \u2713", mark: "Arriv\u00e9 ?", ns: "Absent ?", nsLast: "Nuit derni\u00e8re, pas marqu\u00e9s arriv\u00e9s",
+         place: "Placer dans les lits libres", placeQ: "Mettre ces clients dans des lits libres ?\n", placeNone: "Tout le monde a d\u00e9j\u00e0 un lit ce soir.",
+         placeFull: "Pas de lit libre pour : ", placed: "Plac\u00e9s : ", grace: "Pas marqu\u00e9 arriv\u00e9 \u00e0 minuit = Absent ?",
+         clean: "Liste de m\u00e9nage", cleanNone: "Aucun lit \u00e0 refaire", bed: "Lit", chk: "\u00e0 v\u00e9rifier", lin: "draps",
+         c: " : ", src: {C: "Esp\u00e8ces", A: "Airbnb", P: "Booking", R: "Booking", G: "Agoda"}}
+  };
+  var WD = {en: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"], fr: ["dim.","lun.","mar.","mer.","jeu.","ven.","sam."]};
+  var MO = {en: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"], fr: ["janv.","f\u00e9vr.","mars","avr.","mai","juin","juil.","ao\u00fbt","sept.","oct.","nov.","d\u00e9c."]};
+  function fmt(d, L) { var p = d.split("-"), x = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2])); return WD[L][x.getUTCDay()] + " " + (+p[2]) + " " + MO[L][+p[1] - 1]; }
+  function mk(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  var NOW = A.NOW, TODAY = A.parisDay(NOW);
+  var NIGHT = NOW < A.parisMs(TODAY, NS_H) ? A.parisDay(NOW, -1) : TODAY; /* the night we are in */
+  function idx(d) { for (var i = 0; i < rows.length; i++) if (rows[i].d === d) return i; return -1; }
+  function names(r, s) { var o = []; ((r && r.w && r.w[s]) || []).forEach(function (g) { (g && g[1] || []).forEach(function (n) { if (n) o.push({n: n, s: g[0]}); }); }); return o; }
+  function diff(a, b) { var c = {}; b.forEach(function (x) { c[x.n] = (c[x.n] || 0) + 1; }); return a.filter(function (x) { if (c[x.n] > 0) { c[x.n]--; return false; } return true; }); }
+  function loadA() { try { return JSON.parse(localStorage.getItem(AKEY)) || {}; } catch (e) { return {}; } }
+  function saveA(o) {
+    var lim = A.addDay(TODAY, -30); for (var d in o) if (d < lim) delete o[d];
+    try { localStorage.setItem(AKEY, JSON.stringify(o)); } catch (e) {}
+  }
+  function isArr(d, side, n) { var o = loadA(); return !!(o[d] && o[d][side + ":" + n]); }
+  /* name matching between booking names and the short names typed on beds ("Kai Yu" = "Kai Yu Cheng") */
+  function toks(s) { return String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\(.*?\)/g, " ").split(/[^a-z0-9]+/).filter(Boolean); }
+  function same(a, b) {
+    var x = toks(a), y = toks(b); if (!x.length || !y.length) return false;
+    var hit = function (t, q) { return q.some(function (u) { return u === t || (t.length >= 4 && u.length >= 4 && (u.indexOf(t) === 0 || t.indexOf(u) === 0)); }); };
+    var sub = function (p, q) { return p.every(function (t) { return hit(t, q); }); };
+    return sub(x, y) || sub(y, x);
+  }
+  function roomsOf(side) { return A.ROOMS.filter(function (r) { return (r.dorm || "m") === (side ? "f" : "m"); }); }
+  function bedsFor(side) { /* placement order: rooms in page order; men bottom -> middle -> top; women F-1..F-8 */
+    var out = [];
+    roomsOf(side).forEach(function (room, ri) {
+      A.bedsOf(room).forEach(function (b, k) {
+        var rank = side ? 0 : (b.bunk.levels === 3 ? b.level : (b.level ? 2 : 0));
+        out.push({room: room, id: b.id, ri: ri, rank: rank, k: k, num: +b.id.slice(2)});
+      });
+    });
+    out.sort(function (p, q) { return side ? p.num - q.num : (p.ri - q.ri || p.rank - q.rank || p.k - q.k); });
+    return out;
+  }
+  function bedOf(side, n) { var r = bedsFor(side).filter(function (b) { var v = A.st(b.room, b.id); return v.n && same(v.n, n); }); return r; }
+  function isFree(v) { return v.s === "free" && (!v.n || (v.co && v.co <= TODAY)); }
+  function coOf(side, n, i) { for (var j = i + 1; j < rows.length; j++) if (!names(rows[j], side).some(function (x) { return x.n === n; })) return rows[j].d; return ""; }
+  function srcB(s) { return s === "P" || s === "R" ? "B" : (s === "C" || s === "A" || s === "G" ? s : ""); }
+
+  /* ---- 1. overbooking banner ---- */
+  function banner(L) {
+    var box = document.getElementById("n4-alert"); if (!box) return; box.replaceChildren();
+    var red = [], amb = [];
+    rows.forEach(function (r) {
+      if (r.d < NIGHT) return;
+      var m = r.m[0], f = r.f[0], mc = r.m[3] || MCAP, fc = r.f[3] || FCAP;
+      if (m > mc) red.push(T[L].men + " \u00b7 " + fmt(r.d, L) + " \u00b7 " + m + "/" + mc);
+      else if (m >= MSAFE) amb.push(T[L].men + " \u00b7 " + fmt(r.d, L) + " \u00b7 " + m + "/" + mc);
+      if (f > fc) red.push(T[L].women + " \u00b7 " + fmt(r.d, L) + " \u00b7 " + f + "/" + fc);
+    });
+    function blk(cls, title, list) {
+      var d = mk("div", "n4-al " + cls); d.appendChild(mk("b", null, (cls === "red" ? "\u26D4 " : "\u26A0\uFE0F ") + title + " (" + list.length + ")"));
+      var u = mk("ul"); list.forEach(function (t) { u.appendChild(mk("li", null, t)); }); d.appendChild(u); box.appendChild(d);
+    }
+    if (red.length) blk("red", T[L].ob, red);
+    if (amb.length) blk("amber", T[L].near, amb);
+    if (!red.length && !amb.length) box.appendChild(mk("div", "n4-al ok", "\u2713 " + T[L].ok));
+  }
+  /* ---- 5. cash beds left tonight (men: safety line 22; women: cap 8) ---- */
+  function cashTiles(L) {
+    var i = idx(NIGHT), r = rows[i];
+    [[".card.male", 0, MSAFE], [".card.female", 1, FCAP]].forEach(function (c) {
+      var card = document.querySelector(c[0]); if (!card) return;
+      var p = card.querySelector(".n4-cash"); if (!p) { p = mk("p", "n4-cash"); card.appendChild(p); }
+      p.replaceChildren();
+      if (!r) { p.textContent = T[L].cash + T[L].c + "\u2013"; return; }
+      var left = c[2] - (c[1] ? r.f[0] : r.m[0]);
+      p.appendChild(document.createTextNode(T[L].cash + T[L].c));
+      p.appendChild(mk("span", "v", String(Math.max(0, left))));
+      p.appendChild(document.createTextNode(" \u00b7 "));
+      p.appendChild(mk("span", left > 0 ? "n4-yes" : "n4-no", left > 0 ? T[L].yes : T[L].no));
+    });
+  }
+  /* ---- 2 + 4. tonight's arrivals / check-outs, Arrived ✓, No-show?, Auto-place ---- */
+  function tonight(L) {
+    var box = document.getElementById("n4-tonight"); if (!box) return; box.replaceChildren();
+    var i = idx(NIGHT);
+    var top = mk("div", "lin-top"); top.appendChild(mk("p", "lin-t", T[L].tn + " \u00b7 " + fmt(NIGHT, L))); box.appendChild(top);
+    if (i < 1) { box.appendChild(mk("p", "lin-none", T[L].none)); return; }
+    var pastMid = NOW >= A.parisMs(A.addDay(NIGHT, 1), 0);
+    [[0, "male", "m-only", T[L].men], [1, "female", "f-only", T[L].women]].forEach(function (S) {
+      var side = S[0], now = names(rows[i], side), prev = names(rows[i - 1], side);
+      var ins = diff(now, prev), outs = diff(prev, now);
+      var sb = mk("div", "n4-side " + S[1] + " " + S[2]);
+      sb.appendChild(mk("h4", null, S[3] + " \u00b7 " + T[L].arr + " " + ins.length + " \u00b7 " + T[L].out + " " + outs.length));
+      sb.appendChild(mk("p", "n4-sub", T[L].arr));
+      if (!ins.length) sb.appendChild(mk("p", "lin-none", T[L].none));
+      ins.forEach(function (x) {
+        var li = mk("div", "n4-li"), on = isArr(NIGHT, side, x.n);
+        var nm = mk("span", "nm", x.n + " "); nm.appendChild(mk("span", "sr", "(" + (T[L].src[x.s] || x.s) + ")"));
+        var bd = bedOf(side, x.n); if (bd.length === 1) nm.appendChild(mk("span", "sr", " \u00b7 " + T[L].bed + " " + A.lbl(bd[0].room, bd[0].id)));
+        var b = mk("button", "n4-b", on ? T[L].arrived : T[L].mark); b.type = "button"; b.setAttribute("aria-pressed", String(on));
+        b.addEventListener("click", function () { toggleArr(NIGHT, side, x.n); });
+        li.append(nm, b);
+        if (!on && pastMid) li.appendChild(mk("span", "n4-ns", T[L].ns));
+        sb.appendChild(li);
+      });
+      sb.appendChild(mk("p", "n4-sub", T[L].out));
+      if (!outs.length) sb.appendChild(mk("p", "lin-none", T[L].none));
+      else { var u = mk("ul", "lin-ul"); outs.forEach(function (x) { u.appendChild(mk("li", null, x.n + " (" + (T[L].src[x.s] || x.s) + ")")); }); sb.appendChild(u); }
+      /* last night's arrivals never marked arrived (shown after 06:00, once "tonight" has moved on) */
+      if (NIGHT === TODAY) {
+        var j = idx(A.addDay(NIGHT, -1));
+        if (j >= 1) {
+          var miss = diff(names(rows[j], side), names(rows[j - 1], side)).filter(function (x) { return !isArr(rows[j].d, side, x.n); });
+          if (miss.length) {
+            sb.appendChild(mk("p", "n4-sub", T[L].nsLast + " (" + fmt(rows[j].d, L) + ")"));
+            miss.forEach(function (x) {
+              var li = mk("div", "n4-li"); li.appendChild(mk("span", "nm", x.n));
+              var b = mk("button", "n4-b", T[L].mark); b.type = "button"; b.setAttribute("aria-pressed", "false");
+              b.addEventListener("click", function () { toggleArr(rows[j].d, side, x.n); });
+              li.append(b, mk("span", "n4-ns", T[L].ns)); sb.appendChild(li);
+            });
+          }
+        }
+      }
+      var tb = mk("div", "bm-tools"), pb = mk("button", null, T[L].place), msg = mk("span", "n4-msg"); pb.type = "button";
+      pb.addEventListener("click", function () { autoPlace(side, i, L, msg); });
+      tb.append(pb, msg); sb.appendChild(tb);
+      box.appendChild(sb);
+    });
+    box.appendChild(mk("p", "capnote", T[L].grace));
+  }
+  function toggleArr(d, side, n) {
+    var o = loadA(); o[d] = o[d] || {}; var k = side + ":" + n;
+    if (o[d][k]) delete o[d][k];
+    else {
+      o[d][k] = Date.now();
+      var bd = bedOf(side, n); /* one matching bed booked-but-absent -> guest there */
+      if (bd.length === 1) { var v = A.st(bd[0].room, bd[0].id); if (v.s === "away") { v.s = "in"; A.setSt(bd[0].room, bd[0].id, v); } }
+    }
+    saveA(o); A.render();
+  }
+  function autoPlace(side, i, L, msg) {
+    var guests = names(rows[i], side).filter(function (x) { return !bedOf(side, x.n).length; });
+    if (!guests.length) { msg.style.color = "#4ade80"; msg.textContent = T[L].placeNone; return; }
+    var free = bedsFor(side).filter(function (b) { return isFree(A.st(b.room, b.id)); });
+    var plan = [], left = [];
+    guests.forEach(function (g) { var b = free.shift(); if (b) plan.push({g: g, b: b}); else left.push(g.n); });
+    if (!plan.length) { msg.style.color = "#fca5a5"; msg.textContent = T[L].placeFull + left.join(", "); return; }
+    var txt = plan.map(function (p) { return "\u2022 " + p.g.n + " \u2192 " + T[L].bed + " " + A.lbl(p.b.room, p.b.id); }).join("\n");
+    if (left.length) txt += "\n\n" + T[L].placeFull + left.join(", ");
+    if (!window.confirm(T[L].placeQ + txt)) return;
+    plan.forEach(function (p) {
+      var co = coOf(side, p.g.n, i), v = {s: isArr(NIGHT, side, p.g.n) ? "in" : "away", n: p.g.n, src: srcB(p.g.s), ci: NIGHT};
+      if (co) v.co = co;
+      A.setSt(p.b.room, p.b.id, v);
+    });
+    A.render();
+    var m2 = document.querySelector("#n4-tonight ." + (side ? "female" : "male") + " .n4-msg");
+    if (m2) { m2.textContent = T[L].placed + plan.length + (left.length ? " \u00b7 " + T[L].placeFull + left.join(", ") : ""); if (left.length) m2.style.color = "#fca5a5"; }
+  }
+  /* ---- 3. cleaning list inside Linens: beds flagged 🧺 or ⚠️ to check, with Linens done ✓ ---- */
+  function cleaning(L) {
+    var box = document.getElementById("n4-clean"); if (!box) return; box.replaceChildren();
+    var items = [];
+    A.ROOMS.forEach(function (room) {
+      A.bedsOf(room).forEach(function (b) {
+        var v = A.st(room, b.id), fl = A.needsLinen(v);
+        if (fl || v.s === "chk") items.push({room: room, id: b.id, v: v, fl: fl});
+      });
+    });
+    box.appendChild(mk("h4", null, "\uD83E\uDDF9 " + T[L].clean + T[L].c + items.length));
+    if (!items.length) { box.appendChild(mk("p", "lin-none", T[L].cleanNone)); return; }
+    items.forEach(function (it) {
+      var li = mk("div", "n4-li");
+      var w = (it.room.dorm === "f" ? T[L].women : T[L].men) + " \u00b7 " + T[L].bed + " " + A.lbl(it.room, it.id) + (it.v.n ? " \u00b7 " + it.v.n : "");
+      var tag = (it.v.s === "chk" ? "\u26A0\uFE0F " + T[L].chk : "") + (it.fl ? (it.v.s === "chk" ? " \u00b7 " : "") + "\uD83E\uDDFA " + T[L].lin + " " + A.ddmm(it.v.co) : "");
+      var nm = mk("span", "nm", w + " "); nm.appendChild(mk("span", "sr", tag));
+      var b = mk("button", "n4-b n4-done", "\uD83E\uDDFA " + (L === "fr" ? "Draps faits \u2713" : "Linens done \u2713")); b.type = "button";
+      b.addEventListener("click", function () { A.linenDone(it.room, it.id); });
+      li.append(nm, b); box.appendChild(li);
+    });
+  }
+  window.dormN4Render = function () { var L = A.lang(); banner(L); cashTiles(L); tonight(L); cleaning(L); };
+  window.dormN4Render();
+})();
+
 </script><script id="i18n-js">
 (function () {
   /* Whole-page FR | EN labels. Only UI text changes; guest names, dates, counts and bed data are never touched.
@@ -1116,7 +1379,7 @@ body[data-dorm] .tonight{grid-template-columns:1fr}
     return null;
   }
   /* never translate guest names, notes, the bed map (it has its own labels) or form fields */
-  var SKIP = "script,style,textarea,input,select,#bedmaps,.who-ol,.langsw,td:not(:nth-child(2)):not(:nth-child(3))";
+  var SKIP = "script,style,textarea,input,select,#bedmaps,#n4-alert,#n4-tonight,#n4-clean,.n4-cash,.who-ol,.langsw,td:not(:nth-child(2)):not(:nth-child(3))";
   var touched = [], busy = false;
   function apply(root) {
     if (getLang() !== "fr") return;
