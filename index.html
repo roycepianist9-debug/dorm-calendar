@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-18T16:28:01Z"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-18T17:14:25Z"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="refresh" content="120">
 <title>Who is in</title>
 <script>window.dormGetLang=function(){var q=/[?&]lang=(fr|en)\b/.exec(location.search);if(q)return q[1];try{var s=localStorage.getItem("dormLang");if(s==="fr"||s==="en")return s;}catch(e){}return /^fr\b/i.test(navigator.language||"")?"fr":"en";};</script>
@@ -1253,7 +1253,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
       q.replaceChildren();
       if (k) {
         q.appendChild(document.createTextNode(k.booked + " " + T[L].bk + " + " + k.only.length + " " + T[L].obo));
-        if (k.np.length) q.appendChild(mk("span", "n5-np", " \u00b7 " + k.np.length + " " + T[L].np + T[L].c + k.np.map(function (g) { return g.n; }).join(", ")));
+        /* next6b: the "N not placed yet" notice was removed (Royce 2026-10-18) */
       }
       var left = c[2] - tot;
       p.appendChild(document.createTextNode(T[L].cash + T[L].c));
@@ -1280,7 +1280,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
         var li = mk("div", "n4-li"), on = isArr(NIGHT, side, x.n);
         var bd = bedFor(side, x.n, NIGHT), nm = mk("span", "nm");
         if (bd) nm.appendChild(mk("b", "n5-bed", bedLbl(bd, L) + " \u00b7 "));
-        nm.appendChild(document.createTextNode(x.n + " ")); nm.appendChild(mk("span", "sr", "(" + (T[L].src[x.s] || x.s) + ")" + (bd ? "" : " \u00b7 " + T[L].np)));
+        nm.appendChild(document.createTextNode(x.n + " ")); nm.appendChild(mk("span", "sr", "(" + (T[L].src[x.s] || x.s) + ")"));
         var b = mk("button", "n4-b", on ? T[L].arrived : T[L].mark); b.type = "button"; b.setAttribute("aria-pressed", String(on));
         b.addEventListener("click", function () { toggleArr(NIGHT, side, x.n); });
         li.append(nm, b);
