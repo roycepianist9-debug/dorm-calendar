@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-18T19:03:21Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-18T19:11:56Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who is in</title>
 <script>window.dormGetLang=function(){var q=/[?&]lang=(fr|en)\b/.exec(location.search);if(q)return q[1];try{var s=localStorage.getItem("dormLang");if(s==="fr"||s==="en")return s;}catch(e){}return /^fr\b/i.test(navigator.language||"")?"fr":"en";};</script>
 <style>
@@ -78,7 +78,7 @@ tr:last-child td{border-bottom:none}
 #n8-bmbar .n8-n{font-variant-numeric:tabular-nums}
 html:not(.n8-bm) #bedmaps{display:none}html.n8-bm .wrap>:not(#lang-sw):not(#dorm-sw):not(#n8-bmbar):not(#bedmaps){display:none!important}
 .n9-bd{font-weight:600;color:#a1a1aa}
-.tonight .card{position:relative}.n10-val{position:absolute;top:12px;right:14px;text-align:right;margin:0}.n10-val b{display:block;font-size:clamp(28px,9vw,40px);font-weight:780;letter-spacing:-.03em;line-height:1;color:#4ade80;font-variant-numeric:tabular-nums}.n10-val small.n10-tot{margin-top:1px;font-size:10.5px;color:#71717a}.n10-val small{display:block;margin-top:3px;font-size:11px;color:#a1a1aa}
+.tonight .card{position:relative}.n10-val{position:absolute;top:12px;right:14px;text-align:right;margin:0}.n10-val b{display:block;font-size:clamp(28px,9vw,40px);font-weight:780;letter-spacing:-.03em;line-height:1;color:#4ade80;font-variant-numeric:tabular-nums}.n10-val small.n10-tot{margin-top:2px;font-size:11.5px;font-weight:650;color:#4ade80;font-variant-numeric:tabular-nums}.n10-val small{display:block;margin-top:3px;font-size:11px;color:#a1a1aa}
 .lin-ul.n8-plain{list-style:none;padding-left:0;margin-left:0}#n4-clean[hidden]{display:none}
 .n9-pg{display:flex;gap:6px;margin:6px 0 0}.n9-pg button{flex:1;padding:8px 4px;border-radius:12px;border:1px solid #3f4654;background:#161a22;color:#a1a1aa;font:800 1.15rem system-ui,sans-serif}.n9-pg button small{display:block;font-weight:600;font-size:.72rem}.n9-pg button[aria-selected=true]{background:#3b82f6;border-color:#3b82f6;color:#fff;box-shadow:0 0 0 2px #1e3a8a}
 .bm-room{margin:14px 0 0;box-sizing:border-box;background:#161a22;border:1px solid #262b36;border-radius:16px;padding:12px 14px;box-shadow:inset 3px 0 0 #3b82f6}
@@ -1632,9 +1632,11 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
   function draw() { one("male"); one("female"); } function tot(side, fr) {
     var rows; try { rows = JSON.parse(document.getElementById("chart-data").textContent); } catch (e) { return ""; }
     var today = new Intl.DateTimeFormat("en-CA", {timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit"}).format(new Date());
+    var MEN_BACKFILL = {month: "2026-10", from: "2026-10-01", nights: 4, beds: 21}; /* Royce: Oct 1-4 men avg 21/night, before data starts */
     var mon = today.slice(0, 7), k = side === "male" ? "m" : "f", first = null, sum = 0;
     rows.forEach(function (r) { if (r.d.slice(0, 7) === mon && r.d <= today && r[k]) { if (!first || r.d < first) first = r.d; sum += (r[k][0] || 0) * BED_VALUE; } });
     if (!first) return "";
+    if (side === "male" && mon === MEN_BACKFILL.month && MEN_BACKFILL.from < first) { first = MEN_BACKFILL.from; sum += MEN_BACKFILL.nights * MEN_BACKFILL.beds * BED_VALUE; }
     var M = fr ? ["janv.","f\u00e9vr.","mars","avr.","mai","juin","juil.","ao\u00fbt","sept.","oct.","nov.","d\u00e9c."] : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
     var dd = +first.slice(8), mm = M[+first.slice(5, 7) - 1], s = String(sum).replace(/\B(?=(\d{3})+(?!\d))/g, "\u00a0");
     return fr ? "Total depuis le " + dd + " " + mm + "\u00a0: " + s + "\u00a0\u20ac" : "Total since " + mm + " " + dd + ": " + s + "\u20ac";
