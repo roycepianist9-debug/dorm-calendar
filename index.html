@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-18T17:18:23Z"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="refresh" content="120">
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-18T17:25:16Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who is in</title>
 <script>window.dormGetLang=function(){var q=/[?&]lang=(fr|en)\b/.exec(location.search);if(q)return q[1];try{var s=localStorage.getItem("dormLang");if(s==="fr"||s==="en")return s;}catch(e){}return /^fr\b/i.test(navigator.language||"")?"fr":"en";};</script>
 <style>
@@ -1584,11 +1583,25 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
     fetch(location.pathname + "?vcheck=" + Date.now(), {cache: "no-store"}).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) {
       busy = false; var m = /<meta name="calendar-version" content="([^"]+)">/.exec(t || "");
       if (!m || !(m[1] > cur)) return;
-      try { if (sessionStorage.getItem("dormReloadedFor") === m[1]) return; sessionStorage.setItem("dormReloadedFor", m[1]); } catch (e) {}
-      location.reload();
+      try { if (sessionStorage.getItem("dormReloadedFor") === m[1]) return; } catch (e) {}
+      go(m[1]);
     }).catch(function () { busy = false; });
   }
+  /* next6b: reload only for a really newer version, when the page is in the background or after 20 s without touching it;
+     load it by a new URL (?v=version) so no cache serves the old copy, and come back to the same scroll position */
+  var last = Date.now(), want = "";
+  ["scroll", "touchstart", "keydown", "mousedown"].forEach(function (e) { window.addEventListener(e, function () { last = Date.now(); }, {passive: true}); });
+  function go(v) { want = v; tryGo(); }
+  function tryGo() {
+    if (!want) return;
+    if (!document.hidden && Date.now() - last < 20000) { setTimeout(tryGo, 5000); return; }
+    try { sessionStorage.setItem("dormReloadedFor", want); sessionStorage.setItem("dormScrollY", String(window.scrollY || 0)); } catch (e) {}
+    var q = location.search.replace(/^\?/, "").split("&").filter(function (p) { return p && !/^(v|vcheck)=/.test(p); }); q.push("v=" + encodeURIComponent(want));
+    location.replace(location.pathname + "?" + q.join("&") + location.hash);
+  }
+  try { var sy = sessionStorage.getItem("dormScrollY"); if (sy != null) { sessionStorage.removeItem("dormScrollY"); window.scrollTo(0, +sy || 0); } } catch (e) {}
+  requestAnimationFrame(function () { var d = document.documentElement; d.className = d.className.replace(/ ?n6-wait/g, ""); });
   setTimeout(chk, 4000); setInterval(chk, 300000);
-  document.addEventListener("visibilitychange", function () { if (!document.hidden) chk(); });
+  document.addEventListener("visibilitychange", function () { if (!document.hidden) chk(); else tryGo(); });
 })();
 </script></body></html>
