@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-18T18:22:58Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-18T18:33:21Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who is in</title>
 <script>window.dormGetLang=function(){var q=/[?&]lang=(fr|en)\b/.exec(location.search);if(q)return q[1];try{var s=localStorage.getItem("dormLang");if(s==="fr"||s==="en")return s;}catch(e){}return /^fr\b/i.test(navigator.language||"")?"fr":"en";};</script>
 <style>
@@ -73,11 +73,12 @@ tr:last-child td{border-bottom:none}
 .langsw button{border:0;background:#161a22;color:#a1a1aa;padding:4px 10px;font:inherit;cursor:pointer}
 .langsw button[aria-pressed=true]{background:#3b82f6;color:#fff}
 /* ---- bed map component ---- */
-#n8-bmbar{display:flex;gap:6px;margin:12px 0 8px}#n8-bmbar button{flex:1;padding:10px 12px;border-radius:12px;border:1px solid #3f4654;background:#161a22;color:#a1a1aa;font:700 1rem system-ui,sans-serif;text-align:center}
+#n8-bmbar{clear:both;width:100%;box-sizing:border-box;display:flex;/*n9-row*/gap:6px;margin:12px 0 8px}#n8-bmbar button{flex:1;padding:10px 12px;border-radius:12px;border:1px solid #3f4654;background:#161a22;color:#a1a1aa;font:700 1rem system-ui,sans-serif;text-align:center}
 #n8-bmbar button[aria-selected=true]{background:#3b82f6;border-color:#3b82f6;color:#fff;box-shadow:0 0 0 2px #1e3a8a}
 #n8-bmbar .n8-n{font-variant-numeric:tabular-nums}
 html:not(.n8-bm) #bedmaps{display:none}html.n8-bm .wrap>:not(#lang-sw):not(#dorm-sw):not(#n8-bmbar):not(#bedmaps){display:none!important}
 .lin-ul.n8-plain{list-style:none;padding-left:0;margin-left:0}#n4-clean[hidden]{display:none}
+.n9-pg{display:flex;gap:6px;margin:6px 0 0}.n9-pg button{flex:1;padding:8px 4px;border-radius:12px;border:1px solid #3f4654;background:#161a22;color:#a1a1aa;font:800 1.15rem system-ui,sans-serif}.n9-pg button small{display:block;font-weight:600;font-size:.72rem}.n9-pg button[aria-selected=true]{background:#3b82f6;border-color:#3b82f6;color:#fff;box-shadow:0 0 0 2px #1e3a8a}
 .bm-room{margin:14px 0 0;box-sizing:border-box;background:#161a22;border:1px solid #262b36;border-radius:16px;padding:12px 14px;box-shadow:inset 3px 0 0 #3b82f6}
 .bm-room h2{margin:0 0 2px;font-size:1.05rem;font-weight:780}
 .bm-sketch{display:block;width:100%;max-width:380px;height:auto;margin:6px auto 4px}
@@ -1007,13 +1008,28 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
   Array.prototype.forEach.call(document.querySelectorAll("#dorm-sw button"), function (b) {
     b.addEventListener("click", function () { try { localStorage.setItem(DKEY, b.getAttribute("data-dorm")); } catch (e) {} render(); });
   });
+  /* next9: Male bed map in pages 1 / 2 / 3 = Room 0 / 1 / 2, one room at a time (remembered) */
+  var N9K = "dormRoomPage", N9 = ["m-r0", "m-r1", "m-r2"], N9T = {en: "Room", fr: "Chambre"};
+  function n9Cur() { var t = ""; try { t = localStorage.getItem(N9K) || ""; } catch (e) {} return N9.indexOf(t) >= 0 ? t : "m-r0"; }
+  function n9Bar(L, cur) {
+    var bar = document.createElement("div"); bar.className = "n9-pg"; bar.setAttribute("role", "tablist");
+    N9.forEach(function (id, i) {
+      var b = document.createElement("button"); b.type = "button"; b.setAttribute("role", "tab"); b.setAttribute("aria-selected", id === cur ? "true" : "false");
+      b.appendChild(document.createTextNode(String(i + 1))); var s = document.createElement("small"); s.textContent = N9T[L] + " " + i; b.appendChild(s);
+      b.addEventListener("click", function () { try { localStorage.setItem(N9K, id); } catch (e) {} render(); var hb = document.getElementById("bedmaps"); if (hb && hb.getBoundingClientRect().top < 0) hb.scrollIntoView(); });
+      bar.appendChild(b);
+    });
+    return bar;
+  }
   function render() {
     rollover();
     var L = lang(); host.replaceChildren();
     var only = /[?&]room=([\w-]+)/.exec(location.search), DM = dorm(); paintDorm(L, DM);
+    var PG = (!only && DM === "m") ? n9Cur() : ""; if (PG) host.appendChild(n9Bar(L, PG));
     ROOMS.forEach(function (room) {
       if (only && room.id !== only[1]) return;
       if (!only && (room.dorm || "m") !== DM) return;
+      if (PG && room.id !== PG) return;
       var box = document.createElement("section"); box.className = "bm-room"; box.style.boxShadow = "inset 3px 0 0 " + room.accent;
       var h = document.createElement("h2"); h.textContent = room.title[L]; box.appendChild(h);
       var flagged = bedsOf(room).filter(function (q) { return needsLinen(st(room, q.id)); }).map(function (q) { return {id: lbl(room, q.id), d: ddmm(st(room, q.id).co)}; });
