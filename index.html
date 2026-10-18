@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-18T19:46:49Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-18T19:50:08Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who is in</title>
 <script>window.dormGetLang=function(){var q=/[?&]lang=(fr|en)\b/.exec(location.search);if(q)return q[1];try{var s=localStorage.getItem("dormLang");if(s==="fr"||s==="en")return s;}catch(e){}return /^fr\b/i.test(navigator.language||"")?"fr":"en";};</script>
 <style>
@@ -1055,7 +1055,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
       room.bunks.forEach(function (b) {
         var card = document.createElement("div"); card.className = "bm-bunk"; card.style.borderLeftColor = b.color;
         var t = document.createElement("h3"); t.textContent = b.label[L]; card.appendChild(t);
-        beds.filter(function (q) { return q.bunk === b; }).reverse().forEach(function (bed) {
+        beds.filter(function (q) { return q.bunk === b; }).sort(function (p, q) { return (+p.id.replace(/\D/g, "")) - (+q.id.replace(/\D/g, "")); }).forEach(function (bed) { /* bedorder: ascending numbers down the card */
           var row = document.createElement("div"); row.className = "bm-row";
           var id = document.createElement("span"); id.className = "bm-id"; id.textContent = lbl(room, bed.id);
           var lv = document.createElement("span"); lv.className = "bm-lvl"; lv.textContent = (b.levels === 1 ? T[L].single : b.levels === 3 ? T[L].lv[bed.level] : T[L].lv[bed.level ? 2 : 0]);
