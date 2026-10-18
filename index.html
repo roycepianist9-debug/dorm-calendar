@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-18T22:19:36Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-18T22:22:07Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who is in</title>
 <script>window.dormGetLang=function(){var q=/[?&]lang=(fr|en)\b/.exec(location.search);if(q)return q[1];try{var s=localStorage.getItem("dormLang");if(s==="fr"||s==="en")return s;}catch(e){}return /^fr\b/i.test(navigator.language||"")?"fr":"en";};</script>
 <style>
@@ -1632,11 +1632,13 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
   function draw() { one("male"); one("female"); } function tot(side, fr) {
     var rows; try { rows = JSON.parse(document.getElementById("chart-data").textContent); } catch (e) { return ""; }
     var today = new Intl.DateTimeFormat("en-CA", {timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit"}).format(new Date());
+    var RATE_UNTIL = {d: "2026-10-15", v: 10}; /* Royce: avg night price 10\u20ac up to Oct 15 incl., then BED_VALUE */
+    function rate(d) { return d <= RATE_UNTIL.d ? RATE_UNTIL.v : BED_VALUE; }
     var MEN_BACKFILL = {month: "2026-10", from: "2026-10-01", nights: 4, beds: 21}; /* Royce: Oct 1-4 men avg 21/night, before data starts */
     var mon = today.slice(0, 7), k = side === "male" ? "m" : "f", first = null, sum = 0;
-    rows.forEach(function (r) { if (r.d.slice(0, 7) === mon && r.d <= today && r[k]) { if (!first || r.d < first) first = r.d; sum += (r[k][0] || 0) * BED_VALUE; } });
+    rows.forEach(function (r) { if (r.d.slice(0, 7) === mon && r.d <= today && r[k]) { if (!first || r.d < first) first = r.d; sum += (r[k][0] || 0) * rate(r.d); } });
     if (!first) return "";
-    if (side === "male" && mon === MEN_BACKFILL.month && MEN_BACKFILL.from < first) { first = MEN_BACKFILL.from; sum += MEN_BACKFILL.nights * MEN_BACKFILL.beds * BED_VALUE; }
+    if (side === "male" && mon === MEN_BACKFILL.month && MEN_BACKFILL.from < first) { first = MEN_BACKFILL.from; sum += MEN_BACKFILL.nights * MEN_BACKFILL.beds * rate(MEN_BACKFILL.from); }
     var M = fr ? ["janv.","f\u00e9vr.","mars","avr.","mai","juin","juil.","ao\u00fbt","sept.","oct.","nov.","d\u00e9c."] : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
     var dd = +first.slice(8), mm = M[+first.slice(5, 7) - 1], s = String(sum).replace(/\B(?=(\d{3})+(?!\d))/g, "\u00a0");
     return fr ? "Total depuis le " + dd + " " + mm + "\u00a0: " + s + "\u00a0\u20ac" : "Total since " + mm + " " + dd + ": " + s + "\u20ac";
