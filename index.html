@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-18T17:14:25Z"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-18T17:18:23Z"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="refresh" content="120">
 <title>Who is in</title>
 <script>window.dormGetLang=function(){var q=/[?&]lang=(fr|en)\b/.exec(location.search);if(q)return q[1];try{var s=localStorage.getItem("dormLang");if(s==="fr"||s==="en")return s;}catch(e){}return /^fr\b/i.test(navigator.language||"")?"fr":"en";};</script>
@@ -1389,7 +1389,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
       Array.prototype.forEach.call(svg.querySelectorAll("g.onsale [data-y0]"), function (e) { e.setAttribute("y", e.getAttribute("data-y0")); });
       var g = sv("g", {"class": "n5-ov", "pointer-events": "none"}), minY = vb[1];
       var df = sv("defs", {}, g);
-      [["n5s" + S[0], S[3], S[4]], ["n5r" + S[0], "#fca5a5", "#b91c1c"]].forEach(function (p) {
+      [["n5s" + S[0], S[3], S[4]], ["n5r" + S[0], "#c4b5fd", "#6d28d9"] /* next6c: over-cap part purple, not Airbnb red */].forEach(function (p) {
         var pt = sv("pattern", {id: p[0], width: "4", height: "4", patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)"}, df);
         sv("rect", {width: "4", height: "4", fill: p[2]}, pt); sv("rect", {width: "2", height: "4", fill: p[1]}, pt);
       });
@@ -1400,7 +1400,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
         var yIn = Math.max(yt, capY);
         if (yb > yIn) sv("rect", {x: x, y: yIn.toFixed(1), width: 12, height: (yb - yIn).toFixed(1), fill: "url(#n5s" + S[0] + ")"}, g);
         if (yt < capY) sv("rect", {x: x, y: yt.toFixed(1), width: 12, height: (Math.min(yb, capY) - yt).toFixed(1), fill: "url(#n5r" + S[0] + ")"}, g);
-        var over = k.total > cap, t = sv("text", {x: cx, y: Math.round(yt - 2), "text-anchor": "middle", fill: over ? "#fca5a5" : S[3], "font-size": "9", "font-weight": "800", stroke: "#0c0e12", "stroke-width": "2", "paint-order": "stroke"}, g);
+        var over = k.total > cap, t = sv("text", {x: cx, y: Math.round(yt - 2), "text-anchor": "middle", fill: over ? "#c4b5fd" : S[3], "font-size": "9", "font-weight": "800", stroke: "#0c0e12", "stroke-width": "2", "paint-order": "stroke"}, g);
         t.textContent = String(k.total); minY = Math.min(minY, yt - 12);
         Array.prototype.forEach.call(svg.querySelectorAll("g.onsale rect, g.onsale text"), function (e) { /* lift on-sale bars above the new segment */
           var ex = +e.getAttribute("x") + (e.tagName === "rect" ? 4 : 0); if (Math.round(ex) !== Math.round(cx)) return;
