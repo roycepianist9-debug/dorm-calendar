@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-18T22:29:02Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-18T22:30:05Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who is in</title>
 <script>window.dormGetLang=function(){var q=/[?&]lang=(fr|en)\b/.exec(location.search);if(q)return q[1];try{var s=localStorage.getItem("dormLang");if(s==="fr"||s==="en")return s;}catch(e){}return /^fr\b/i.test(navigator.language||"")?"fr":"en";};</script>
 <style>
@@ -819,7 +819,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
      is older than SEED_T (or has no stamp), otherwise the phone's own edit. To push new built-in data,
      change the beds below and bump that room's SEED_T. src: A = Airbnb, B = Booking, C = Cash, "" = unknown.
      A reset on a phone is an edit (stamped), so it beats older built-in data; newer built-in data still wins. */
-  var SEED_T = {"f": "2026-10-18T12:51:16Z", "m-r0": "2026-10-18T22:29:02Z", "m-r1": "2026-10-18T22:29:02Z", "m-r2": "2026-10-18T22:29:02Z"};
+  var SEED_T = {"f": "2026-10-18T12:51:16Z", "m-r0": "2026-10-18T22:30:05Z", "m-r1": "2026-10-18T22:29:02Z", "m-r2": "2026-10-18T22:30:05Z"};
   var SEED = {
     /* Royce's list of 2026-10-17, corrected 2026-10-18 (Doniale F-2, Morgane F-8 res 5913138110, Anna left Oct 17, Keti out 23/10); co = check-out; ci only where the calendar data gives it exactly */
     "f": {
@@ -837,7 +837,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
     "m-r0": {
       "M-1": {s: "in", n: "Christophe", src: "A", co: "2026-10-25"},
       "M-2": {s: "in", n: "Pedro Ferreira Onofre", src: "A", ci: "2026-10-18", co: "2026-10-21"},
-      "M-3": {s: "away", n: "Aravind Koolagurki", src: "G", ci: "2026-10-18", co: "2026-10-20"}, /* yohan28 Royce: Aravind (absent) moved from 28 */
+      "M-3": {s: "in", n: "Ruben", src: "", lb: 1}, /* labels Royce Oct 18 (Aravind off map) */ /* yohan28 Royce: Aravind (absent) moved from 28 */
       "M-4": {s: "in", n: "Vincent", src: "C"},
       "M-5": {s: "in", n: "Kai Yu", src: "A", ci: "2026-10-15", co: "2026-10-19"},
       "M-6": {s: "in", n: "AbdelKarem", src: "C", co: "2026-10-30"},
@@ -856,15 +856,15 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
       "M-20": {s: "in", n: "Nile", src: "A", co: "2026-10-31"}
     },
     "m-r2": {
-      "M-21": {s: "in", n: "Logan", src: "J", co: "2026-10-19"},
-      "M-22": {s: "in", n: "Jean Luc IMFURAYACU", src: "G", ci: "2026-10-10", co: "2026-10-23"},
+      "M-21": {s: "in", n: "Nab friend", src: "", co: "2026-10-19", lb: 1}, /* labels (Logan off map) */
+      "M-22": {s: "in", n: "Portuguese 1", src: "", co: "2026-10-19", lb: 1}, /* labels (Jean Luc off map) */
       "M-23": {s: "free", x: 1},
       "M-24": {s: "in", n: "Kamel", src: "C", co: "2026-11-17"},
-      "M-25": {s: "in", n: "Guirec Recoursé", src: "A", ci: "2026-10-18", co: "2026-10-19"}, /* bedfix2 Royce: swapped with Saeed */
+      "M-25": {s: "in", n: "Portuguese 2", src: "", co: "2026-10-19", lb: 1}, /* labels (Guirec off map) */ /* bedfix2 Royce: swapped with Saeed */
       "M-26": {s: "in", n: "Nader", src: "C", co: "2026-10-31"},
       "M-27": {s: "in", n: "Saeed Ghanbari", src: "G", ci: "2026-10-18", co: "2026-10-23"}, /* bedfix2 Royce */
       "M-28": {s: "in", n: "Yohan", src: "J", co: "2026-10-19"}, /* yohan28 Royce: Yohan moved from 3 */ /* bedfix2 Royce: absent -> red */
-      "M-29": {s: "in", n: "Mohammad", src: "C", co: "2026-11-06"}
+      "M-29": {s: "in", n: "Portuguese 3", src: "", lb: 1} /* labels (Mohammad off map) */
     }
   };
   function mergeSeed(s) {
@@ -1227,7 +1227,9 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
     if (i == null) i = idx(NIGHT); var r = rows[i]; if (!r || r.d < NIGHT) return null; var ND = r.d;
     var booked = side ? r.f[0] : r.m[0], guests = names(r, side);
     var beds = bedsFor(side).filter(function (b) { return occ(A.st(b.room, b.id), ND); });
-    var only = beds.filter(function (b) { var n = A.st(b.room, b.id).n; return !guests.some(function (g) { return same(g.n, n); }); });
+    var only = beds.filter(function (b) { if (A.st(b.room, b.id).lb) return false; var n = A.st(b.room, b.id).n; return !guests.some(function (g) { return same(g.n, n); }); });
+    var OFFMAP = {"2026-10-18": ["Logan", "Mohammad"]}; /* labels: beds-only guests moved off the bed map by Royce, still counted */
+    only = only.concat((OFFMAP[ND] || []).filter(function (n) { return !beds.some(function (b) { return same(A.st(b.room, b.id).n, n); }); }).map(function (n) { return {n: n, off: 1}; }));
     var np = guests.filter(function (g) { return !beds.some(function (b) { return same(A.st(b.room, b.id).n, g.n); }); });
     return {booked: booked, beds: beds.length, only: only, np: np, total: booked + only.length};
   }
