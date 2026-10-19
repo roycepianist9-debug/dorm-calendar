@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-19T16:15:46Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-19T22:07:36Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who is in</title>
 <script>window.dormGetLang=function(){var q=/[?&]lang=(fr|en)\b/.exec(location.search);if(q)return q[1];try{var s=localStorage.getItem("dormLang");if(s==="fr"||s==="en")return s;}catch(e){}return /^fr\b/i.test(navigator.language||"")?"fr":"en";};</script>
 <style>
@@ -145,6 +145,7 @@ body[data-dorm] .tonight{grid-template-columns:1fr}
 .n5-cnt{margin:6px 0 0;font-size:12px;color:#a1a1aa;line-height:1.35}
 .n5-np{color:#fbbf24}
 .n5-await{border-color:#ef4444!important}
+.as-btn{border-color:#60a5fa!important}
 .n5-sw0,.n5-sw1{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
 .n5-sw0{background:repeating-linear-gradient(45deg,#93c5fd 0 2px,#1d4ed8 2px 4px)}
 .n5-sw1{background:repeating-linear-gradient(45deg,#fdba74 0 2px,#c2410c 2px 4px)}
@@ -1055,7 +1056,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
       if (only && room.id !== only[1]) return;
       if (!only && (room.dorm || "m") !== DM) return;
       if (PG && room.id !== PG) return;
-      var box = document.createElement("section"); box.className = "bm-room"; box.style.boxShadow = "inset 3px 0 0 " + room.accent;
+      var box = document.createElement("section"); box.className = "bm-room"; box.setAttribute("data-room", room.id); box.style.boxShadow = "inset 3px 0 0 " + room.accent;
       var h = document.createElement("h2"); h.textContent = room.title[L]; box.appendChild(h);
       var flagged = bedsOf(room).filter(function (q) { return needsLinen(st(room, q.id)); }).map(function (q) { return {id: lbl(room, q.id), d: ddmm(st(room, q.id).co)}; });
       var sm = document.createElement("p"); sm.className = "bm-sum" + (flagged.length ? "" : " none");
@@ -1256,7 +1257,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
     var np = guests.filter(function (g) { return !beds.some(function (b) { return same(A.st(b.room, b.id).n, g.n); }); });
     return {booked: booked, beds: beds.length, only: only, np: np, total: booked + only.length};
   }
-  window.dormN4Count = count;
+  window.dormN4Count = count; window.dormN4Same = same; window.dormN4Rows = rows; window.dormN4Night = NIGHT; window.dormN4IsArr = isArr;
   function isFree(v) { if (v.x) return false; return (v.s === "free" && (!v.n || (v.co && v.co <= TODAY))) || (!!v.n && !!v.co && v.co <= NIGHT); }
   function coOf(side, n, i) { for (var j = i + 1; j < rows.length; j++) if (!names(rows[j], side).some(function (x) { return x.n === n; })) return rows[j].d; return ""; }
   function srcB(s) { return s === "P" || s === "R" ? "B" : (s === "C" || s === "A" || s === "G" ? s : ""); }
@@ -1505,6 +1506,73 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
   window.dormN4Render();
 })();
 
+</script><script id="assign-js">/* assign (2026-10-20, Royce OK): only guests staying the night shown (ci <= night < co) with no bed that night;: "Assign" button per bed-map room. Random free bed in the right dorm
+   for every current/upcoming guest in the bookings who is on no bed yet. Never touches a placed guest. */
+(function () {
+  var A = window.dormBedAPI, rows = window.dormN4Rows, same = window.dormN4Same, NIGHT = window.dormN4Night;
+  if (!A || !rows || !same) return;
+  var NEVER = {"M-13": 1, "M-18": 1, "M-23": 1};
+  var T = {en: {b: "Assign", q: "Assign these guests to random free beds?\n", none: "Every guest already has a bed.", full: " didn\u2019t fit (no free bed)", ok: "Assigned: ", bed: "Bed"},
+           fr: {b: "Attribuer", q: "Attribuer ces clients \u00e0 des lits libres au hasard ?\n", none: "Tous les clients ont d\u00e9j\u00e0 un lit.", full: " sans lit libre", ok: "Attribu\u00e9s : ", bed: "Lit"}};
+  var MSG = {};
+  function srcB(s) { return s === "P" || s === "R" ? "B" : (s === "C" || s === "A" || s === "G" || s === "J" ? s : ""); }
+  function names(r, side) { var o = []; ((r && r.w && r.w[side]) || []).forEach(function (g) { (g && g[1] || []).forEach(function (n) { if (n) o.push({n: n, s: g[0]}); }); }); return o; }
+  function stays(side) { /* one stay per run of consecutive nights; current or upcoming only */
+    var out = [], open = {};
+    rows.forEach(function (r, i) {
+      var cur = {}; names(r, side).forEach(function (x) { cur[x.n] = x; });
+      for (var n in open) if (!cur[n]) { open[n].co = r.d; out.push(open[n]); delete open[n]; }
+      for (var k in cur) if (!open[k]) open[k] = {n: k, s: cur[k].s, ci: r.d};
+    });
+    for (var n in open) out.push(open[n]); /* runs to the end of the data: no check-out */
+    return out.filter(function (g) { return g.ci <= NIGHT && (!g.co || g.co > NIGHT); });
+  }
+  function allBeds(side) { var o = []; A.ROOMS.forEach(function (room) { if ((room.dorm || "m") !== (side ? "f" : "m")) return; A.bedsOf(room).forEach(function (b) { o.push({room: room, id: b.id}); }); }); return o; }
+  function covers(v) { return !!v.n && !v.x && (!v.ci || v.ci <= NIGHT) && (!v.co || v.co > NIGHT); }
+  function placed(side, n) { return allBeds(side).some(function (b) { var v = A.st(b.room, b.id); return covers(v) && same(v.n, n); }); }
+  function freeFor(v) { /* free for the night shown: usable, nobody on it covers that night, and no later guest already written on it */
+    if (v.x) return false; if (!v.n) return true;
+    return !!v.co && v.co <= NIGHT;
+  }
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function assign(room, L) {
+    var side = room.dorm === "f" ? 1 : 0;
+    var seen = {}, guests = stays(side).filter(function (g) { if (seen[g.n] || placed(side, g.n)) return false; seen[g.n] = 1; return true; }).sort(function (a, b) { return a.ci < b.ci ? -1 : a.ci > b.ci ? 1 : 0; });
+    if (!guests.length) { MSG[room.id] = {t: T[L].none}; A.render(); return; }
+    var beds = shuffle(A.bedsOf(room).map(function (b) { return b.id; }).filter(function (id) { return !NEVER[id]; }));
+    var taken = {}, plan = [], left = [];
+    guests.forEach(function (g) {
+      var id = beds.filter(function (b) { return !taken[b] && freeFor(A.st(room, b)); })[0];
+      if (id) { taken[id] = 1; plan.push({g: g, id: id}); } else left.push(g.n);
+    });
+    if (!plan.length) { MSG[room.id] = {t: left.length + T[L].full, bad: 1}; A.render(); return; }
+    var txt = plan.map(function (p) { return "\u2022 " + p.g.n + " \u2192 " + T[L].bed + " " + A.lbl(room, p.id) + " (" + A.ddmm(p.g.ci) + (p.g.co ? "\u2013" + A.ddmm(p.g.co) : "") + ")"; }).join("\n");
+    if (left.length) txt += "\n\n" + left.length + T[L].full;
+    if (!window.confirm(T[L].q + txt)) return;
+    plan.forEach(function (p) {
+      var old = A.st(room, p.id), v = {}; for (var f in old) v[f] = old[f]; /* keep every field (lb, x ...) then fill the guest */
+      v.n = p.g.n; v.src = srcB(p.g.s); v.ci = p.g.ci; if (p.g.co) v.co = p.g.co; else delete v.co;
+      v.s = (window.dormN4IsArr && window.dormN4IsArr(NIGHT, side, p.g.n)) ? "in" : "away";
+      A.setSt(room, p.id, v);
+    });
+    MSG[room.id] = {t: T[L].ok + plan.length + (left.length ? " \u00b7 " + left.length + T[L].full : ""), bad: left.length ? 1 : 0};
+    A.render();
+  }
+  function addButtons() {
+    var L = A.lang();
+    Array.prototype.forEach.call(document.querySelectorAll("#bedmaps .bm-room[data-room]"), function (box) {
+      var room = A.ROOMS.filter(function (r) { return r.id === box.getAttribute("data-room"); })[0], tb = box.querySelector(".bm-tools");
+      if (!room || !tb || tb.querySelector(".as-btn")) return;
+      var b = document.createElement("button"); b.type = "button"; b.className = "as-btn"; b.textContent = "\uD83C\uDFB2 " + T[L].b;
+      b.addEventListener("click", function () { assign(room, A.lang()); });
+      tb.appendChild(b);
+      if (MSG[room.id]) { var m = document.createElement("span"); m.className = "bm-msg"; if (MSG[room.id].bad) m.style.color = "#fca5a5"; m.textContent = MSG[room.id].t; tb.appendChild(m); delete MSG[room.id]; }
+    });
+  }
+  var prev = window.dormN4Render;
+  window.dormN4Render = function () { if (prev) try { prev(); } catch (e) { if (window.console) console.error(e); } addButtons(); };
+  addButtons();
+})();
 </script><script id="i18n-js">
 (function () {
   /* Whole-page FR | EN labels. Only UI text changes; guest names, dates, counts and bed data are never touched.
