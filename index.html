@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-21T18:26:17Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-21T19:25:45Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who is in</title>
 <script>window.dormGetLang=function(){var q=/[?&]lang=(fr|en)\b/.exec(location.search);if(q)return q[1];try{var s=localStorage.getItem("dormLang");if(s==="fr"||s==="en")return s;}catch(e){}return /^fr\b/i.test(navigator.language||"")?"fr":"en";};</script>
 <style>
@@ -1832,9 +1832,8 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
 })();
 </script>
 <script id="save-js">
-/* ===== Save button: shares bed-map edits + Arrived taps via shared-edits.json in the repo.
-   Token: GitHub fine-grained token, typed once per device, kept ONLY in this browser (localStorage "dormGhToken").
-   Never in the page. Each Save first copies the previous shared-edits.json to versions/. ===== */
+/* ===== Save button: shares bed-map edits + Arrived taps through the Save server (no key needed).
+   The server keeps a backup copy of the previous edits on every Save. ===== */
 (function () {
   var OWNER = "roycepianist9-debug", REPO = "dorm-calendar", PATH = "shared-edits.json", BR = "main";
   var KEYS = ["dormBedMap.v1", "dormArrived.v1"], TK = "dormGhToken", AT = "dormSharedAt", DIRTY = "dormDirty";
@@ -1875,38 +1874,26 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
     btn.style.background = g(DIRTY) ? "#dc2626" : "#2563eb";
   }
   function pull() {
-    return getFile(g(TK)).then(function (f) {
-      if (f && f.data && f.data.savedAt && f.data.savedAt !== g(AT) && !g(DIRTY)) apply(f.data);
-      paint();
-    }).catch(function () { paint(); });
+    /* load shared edits from the Save server; fall back to shared-edits.json in the repo */
+    return fetch("https://royce-dorm-save.netlify.app/load?t=" + Date.now(), {cache: "no-store"}).then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .catch(function () { return fetch("shared-edits.json?t=" + Date.now(), {cache: "no-store"}).then(function (r) { return r.ok ? r.json() : null; }); })
+      .then(function (d) {
+        if (d && d.savedAt && d.savedAt !== g(AT) && !g(DIRTY)) apply(d);
+        paint();
+      }).catch(function () { paint(); });
   }
   function token(force) {
     var t = g(TK);
     if (!t || force) { t = window.prompt(tx("Paste the GitHub token for this device (saved only in this browser):", "Collez le jeton GitHub pour cet appareil (gard\u00e9 seulement dans ce navigateur) :"), "") || ""; t = t.trim(); if (t) s(TK, t); }
     return t;
   }
+  var EP = "https://royce-dorm-save.netlify.app/save";
   function save() {
-    if (busy) return; var t = token(false); if (!t) return;
-    busy = true; paint(tx("Saving\u2026", "Enregistrement\u2026"));
-    var who = g("dormEditor") || "", tries = 0;
-    function attempt() {
-      tries++;
-      return getFile(t).then(function (f) {
-        var base = (f && f.data) || {}, now = new Date().toISOString();
-        var d = {savedAt: now, by: who, bedmap: newest(base.bedmap || {}, j(KEYS[0])), arrived: merge(base.arrived || {}, j(KEYS[1]))};
-        var txt = JSON.stringify(d, null, 1), stamp = now.replace(/[-:]/g, "").slice(0, 15);
-        var bk = f ? put(t, "versions/shared-edits/" + stamp + ".json", f.raw, "backup shared-edits before save " + now) : Promise.resolve();
-        return bk.then(function () { return put(t, PATH, txt, "Save from calendar " + now, f && f.sha); }).then(function () { apply(d); });
-      }).catch(function (e) {
-        if ((e.code === 409 || e.code === 422) && tries < 4) return attempt();
-        throw e;
-      });
-    }
-    attempt().then(function () { busy = false; paint(); }).catch(function (e) {
-      busy = false;
-      if (e.code === 401 || e.code === 403) { paint(tx("Token refused \u2013 tap \uD83D\uDD11", "Jeton refus\u00e9 \u2013 touchez \uD83D\uDD11")); }
-      else paint(tx("Save failed: ", "\u00c9chec : ") + e.message);
-    });
+    if (busy) return; busy = true; paint(tx("Saving\u2026", "Enregistrement\u2026"));
+    fetch(EP, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({by: g("dormEditor") || "", bedmap: j(KEYS[0]), arrived: j(KEYS[1])})})
+      .then(function (r) { return r.json().then(function (o) { if (!r.ok) throw new Error(o.error || r.status); return o; }); })
+      .then(function (o) { apply(o.data); busy = false; paint(); })
+      .catch(function (e) { busy = false; paint(tx("Save failed: ", "\u00c9chec : ") + e.message); });
   }
   function ui() {
     if (document.getElementById("save-bar")) return;
@@ -1918,7 +1905,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
     btn.onclick = save;
     var k = document.createElement("button"); k.type = "button"; k.textContent = "\uD83D\uDD11"; k.title = tx("Change token", "Changer le jeton");
     k.style.cssText = "border:0;background:transparent;font-size:16px;cursor:pointer"; k.onclick = function () { token(true); paint(); };
-    bar.append(st, btn, k); document.body.appendChild(bar); paint(); pull();
+    bar.append(st, btn); document.body.appendChild(bar); paint(); pull();
     setInterval(pull, 120000); document.addEventListener("visibilitychange", function () { if (!document.hidden) pull(); });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ui); else ui();
