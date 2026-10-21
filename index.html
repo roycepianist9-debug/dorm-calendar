@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-21T19:25:45Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-21T19:34:46Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who is in</title>
 <script>window.dormGetLang=function(){var q=/[?&]lang=(fr|en)\b/.exec(location.search);if(q)return q[1];try{var s=localStorage.getItem("dormLang");if(s==="fr"||s==="en")return s;}catch(e){}return /^fr\b/i.test(navigator.language||"")?"fr":"en";};</script>
 <style>
@@ -1887,6 +1887,10 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
     if (!t || force) { t = window.prompt(tx("Paste the GitHub token for this device (saved only in this browser):", "Collez le jeton GitHub pour cet appareil (gard\u00e9 seulement dans ce navigateur) :"), "") || ""; t = t.trim(); if (t) s(TK, t); }
     return t;
   }
+  window.dormForcePull = function () {
+    return fetch("https://royce-dorm-save.netlify.app/load?t=" + Date.now(), {cache: "no-store"}).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function (d) { if (d && (d.bedmap || d.arrived)) apply(d); paint(); return d; });
+  };
   var EP = "https://royce-dorm-save.netlify.app/save";
   function save() {
     if (busy) return; busy = true; paint(tx("Saving\u2026", "Enregistrement\u2026"));
@@ -1922,6 +1926,34 @@ td,th{overflow-wrap:anywhere;text-overflow:clip}
   function all() { document.querySelectorAll("textarea.bm-name").forEach(function (e) { if (!e._fit) { e._fit = 1; e.addEventListener("input", function () { fit(e); }); e.addEventListener("keydown", function (ev) { if (ev.key === "Enter") ev.preventDefault(); }); e.title = e.value; } fit(e); }); }
   new MutationObserver(function () { all(); }).observe(document.documentElement, {childList: true, subtree: true});
   window.addEventListener("resize", all); if (document.readyState !== "loading") all(); else document.addEventListener("DOMContentLoaded", all);
+})();
+</script>
+<script id="update-js">
+(function () {
+  function fr() { return (window.dormGetLang && window.dormGetLang()) === "fr"; }
+  function tx(e, f) { return fr() ? f : e; }
+  function hm() { return new Date().toLocaleTimeString("en-GB", {timeZone: "Europe/Paris", hour: "2-digit", minute: "2-digit"}); }
+  function go(b, m) {
+    var dirty = false; try { dirty = !!localStorage.getItem("dormDirty"); } catch (e) {}
+    if (dirty && !confirm(tx("You have unsaved changes on this phone. Update anyway? Newer edits from the server will replace yours.", "Modifs non enregistr\u00e9es sur ce t\u00e9l\u00e9phone. Mettre \u00e0 jour quand m\u00eame ? Les modifs plus r\u00e9centes du serveur remplaceront les v\u00f4tres."))) return;
+    if (!window.dormForcePull) { m.textContent = tx("Error", "Erreur"); return; }
+    b.disabled = true; m.textContent = "\u2026";
+    window.dormForcePull().then(function () { m.textContent = tx("Updated ", "Mis \u00e0 jour ") + hm(); })
+      .catch(function (e) { m.textContent = tx("Update failed: ", "\u00c9chec : ") + e.message; })
+      .then(function () { b.disabled = false; setTimeout(function () { m.textContent = ""; }, 8000); });
+  }
+  function add() {
+    document.querySelectorAll(".as-btn:not(.up-btn)").forEach(function (a) {
+      if (a.nextElementSibling && a.nextElementSibling.classList.contains("up-btn")) return;
+      var b = document.createElement("button"); b.type = "button"; b.className = "as-btn up-btn"; b.textContent = "\uD83D\uDD04 " + tx("Update", "Actualiser");
+      b.style.marginLeft = "6px";
+      var m = document.createElement("span"); m.className = "up-msg"; m.style.cssText = "margin-left:6px;font-size:12px";
+      b.onclick = function () { go(b, m); };
+      a.after(b, m);
+    });
+  }
+  new MutationObserver(add).observe(document.documentElement, {childList: true, subtree: true});
+  if (document.readyState !== "loading") add(); else document.addEventListener("DOMContentLoaded", add);
 })();
 </script>
 </body></html>
