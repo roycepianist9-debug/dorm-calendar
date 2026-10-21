@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-21T18:02:07Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-21T18:06:05Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who is in</title>
 <script>window.dormGetLang=function(){var q=/[?&]lang=(fr|en)\b/.exec(location.search);if(q)return q[1];try{var s=localStorage.getItem("dormLang");if(s==="fr"||s==="en")return s;}catch(e){}return /^fr\b/i.test(navigator.language||"")?"fr":"en";};</script>
 <style>
@@ -1849,6 +1849,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
   function b64e(t) { return btoa(unescape(encodeURIComponent(t))); }
   function b64d(t) { return decodeURIComponent(escape(atob(String(t).replace(/\s/g, "")))); }
   function merge(a, b) { var o = {}, k, r; for (k in a) o[k] = a[k]; for (k in b) { if (b[k] && typeof b[k] === "object" && !Array.isArray(b[k]) && o[k] && typeof o[k] === "object") { r = {}; for (var x in o[k]) r[x] = o[k][x]; for (x in b[k]) r[x] = b[k][x]; o[k] = r; } else o[k] = b[k]; } return o; }
+  function newest(a, b) { var o = JSON.parse(JSON.stringify(a)); for (var r in b) { o[r] = o[r] || {}; for (var k in b[r]) { var x = o[r][k], y = b[r][k]; if (!x || (y && (y.t || 0) >= (x.t || 0))) o[r][k] = y; } } return o; }
   function hdr(t) { var h = {"Accept": "application/vnd.github+json"}; if (t) h.Authorization = "Bearer " + t; return h; }
   function getFile(t) {
     return fetch(API + PATH + "?ref=" + BR + "&t=" + Date.now(), {headers: hdr(t), cache: "no-store"}).then(function (r) {
@@ -1862,7 +1863,9 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
   }
   function rerender() { ["dormBedMapRender", "dormN4Render"].forEach(function (f) { try { if (window[f]) window[f](); } catch (e) {} }); }
   function apply(d) {
-    if (d.bedmap) s(KEYS[0], JSON.stringify(d.bedmap)); if (d.arrived) s(KEYS[1], JSON.stringify(d.arrived));
+    /* merge, never wipe: per bed the newest edit (t) wins, beds only on this phone are kept */
+    if (d.bedmap) { var L0 = j(KEYS[0]), R = d.bedmap; for (var rm in R) { L0[rm] = L0[rm] || {}; for (var bd in R[rm]) { var lv = L0[rm][bd], sv = R[rm][bd]; if (!lv || (sv && (sv.t || 0) >= (lv.t || 0))) L0[rm][bd] = sv; } } s(KEYS[0], JSON.stringify(L0)); }
+    if (d.arrived) s(KEYS[1], JSON.stringify(merge(j(KEYS[1]), d.arrived)));
     s(AT, d.savedAt || ""); s(DIRTY, ""); rerender();
   }
   var st, btn, busy = false;
@@ -1890,7 +1893,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
       tries++;
       return getFile(t).then(function (f) {
         var base = (f && f.data) || {}, now = new Date().toISOString();
-        var d = {savedAt: now, by: who, bedmap: merge(base.bedmap || {}, j(KEYS[0])), arrived: merge(base.arrived || {}, j(KEYS[1]))};
+        var d = {savedAt: now, by: who, bedmap: newest(base.bedmap || {}, j(KEYS[0])), arrived: merge(base.arrived || {}, j(KEYS[1]))};
         var txt = JSON.stringify(d, null, 1), stamp = now.replace(/[-:]/g, "").slice(0, 15);
         var bk = f ? put(t, "versions/shared-edits/" + stamp + ".json", f.raw, "backup shared-edits before save " + now) : Promise.resolve();
         return bk.then(function () { return put(t, PATH, txt, "Save from calendar " + now, f && f.sha); }).then(function () { apply(d); });
