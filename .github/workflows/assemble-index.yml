@@ -30,7 +30,7 @@ jobs:
             exit 0
           fi
           mv /tmp/new-index.html index.html
-          python3 - <<'PY'
+          python3 - <<'PYINNER'
           from pathlib import Path
           h = Path("index.html").read_text(encoding="utf-8")
           assert h.startswith("<!DOCTYPE html>"), h[:40]
@@ -39,7 +39,7 @@ jobs:
           for bad in ["fateh", "Denys"]:
               assert bad not in h, bad
           print("size", len(h.encode()))
-          PY
+          PYINNER
           echo "incomplete=false" >> "$GITHUB_OUTPUT"
       - name: Refuse rollbacks to older calendar data
         if: steps.assemble.outputs.incomplete != 'true'
@@ -47,7 +47,7 @@ jobs:
           HEAD_MSG: ${{ github.event.head_commit.message }}
         run: |
           set -euo pipefail
-          python3 - <<'PY'
+          python3 - <<'PYINNER'
           import os, re
           from pathlib import Path
           rx = re.compile(r'<meta name="calendar-version" content="([0-9TZ:-]+)">')
@@ -61,7 +61,32 @@ jobs:
                   raise SystemExit("REFUSED: new index has no calendar-version but live has " + old.group(1) + " (looks like an old LAST_GOOD). Patch on top of live, or add [allow-rollback] to the commit message after Royce OK.")
               if new.group(1) < old.group(1):
                   raise SystemExit("REFUSED: new calendar-version " + new.group(1) + " is older than live " + old.group(1) + ". Patch on top of live, or add [allow-rollback] after Royce OK.")
-          PY
+          PYINNER
+      - name: Lock bedmap-js / i18n-js (refuse SyntaxError)
+        if: steps.assemble.outputs.incomplete != 'true'
+        run: |
+          set -euo pipefail
+          # 2026-10-23: Bryan M-15 patch left `}, /* comment */,` which aborted the
+          # whole bedmap IIFE → Female/Male toggle dead + blank Bed map. Gate every
+          # assemble so invalid JS never becomes the live page.
+          python3 - <<'PYINNER'
+          import re, subprocess, tempfile
+          from pathlib import Path
+          h = Path("index.html").read_text(encoding="utf-8")
+          for sid in ("bedmap-js", "i18n-js"):
+              m = re.search(rf'<script id="{sid}">(.*?)</script>', h, re.S)
+              if not m:
+                  raise SystemExit("REFUSED: missing <script id=\"%s\">" % sid)
+              body = m.group(1)
+              with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False) as f:
+                  f.write(body)
+                  path = f.name
+              r = subprocess.run(["node", "--check", path], capture_output=True, text=True)
+              Path(path).unlink(missing_ok=True)
+              if r.returncode != 0:
+                  raise SystemExit(f"REFUSED: {sid} SyntaxError — fix the publish patch before shipping.\n{r.stderr}")
+              print(sid, "ok", len(body), "chars")
+          PYINNER
       - name: Commit assembled index
         if: steps.assemble.outputs.incomplete != 'true'
         run: |
