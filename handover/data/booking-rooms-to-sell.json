@@ -1,0 +1,26 @@
+{
+  "saved_at": "2026-10-03T23:42:00+08:00",
+  "source": "Booking.com rooms to sell",
+  "hotel_id": "16844588",
+  "room_id": "1684458802",
+  "side": "male",
+  "note": "Additional inventory still for sale, not people already booked. Female rooms to sell are unknown and are not in this file. Nights absent from rooms_to_sell draw as 0.",
+  "rooms_to_sell": {
+    "2026-10-03": 0,
+    "2026-10-04": 2,
+    "2026-10-05": 3,
+    "2026-10-06": 3,
+    "2026-10-07": 4,
+    "2026-10-08": 4,
+    "2026-10-09": 4,
+    "2026-10-10": 4,
+    "2026-10-11": 3,
+    "2026-10-12": 3,
+    "2026-10-13": 1,
+    "2026-10-14": 2,
+    "2026-10-15": 3,
+    "2026-10-16": 4,
+    "2026-10-17": 4,
+    "2026-10-18": 1
+  }
+}

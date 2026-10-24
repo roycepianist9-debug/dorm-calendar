@@ -1,0 +1,153 @@
+[
+ {
+  "guest": "Zacharia Assoumani",
+  "side": "male",
+  "check_in": "2026-10-06",
+  "check_out": "2026-10-07",
+  "beds": 1,
+  "status": "ok",
+  "booking_id": "709237007",
+  "payment": "Agoda Collect",
+  "listing": "Just for sleep daily 8pm to 10am - Male shared room"
+ },
+ {
+  "guest": "RONGHUA ZHANG",
+  "side": "male",
+  "check_in": "2026-10-09",
+  "check_out": "2026-10-11",
+  "beds": 1,
+  "status": "ok",
+  "booking_id": "1783135267",
+  "payment": "Agoda Collect",
+  "listing": "Just for sleep daily 8pm to 10am - Male shared room"
+ },
+ {
+  "guest": "IMFURAYACU JEAN LUC",
+  "side": "male",
+  "check_in": "2026-10-10",
+  "check_out": "2026-10-23",
+  "beds": 1,
+  "status": "ok",
+  "booking_id": "695306371",
+  "payment": "Agoda Collect",
+  "listing": "Just for sleep, Male dorm share room daily 8pm-10am"
+ },
+ {
+  "guest": "Aravind Koolagurki Thimmarayappa",
+  "side": "male",
+  "check_in": "2026-10-13",
+  "check_out": "2026-10-15",
+  "beds": 1,
+  "status": "ok",
+  "booking_id": "2048901659",
+  "payment": "Agoda Collect",
+  "listing": "Just for sleep daily stay 8pm to 10am-Male Dorm"
+ },
+ {
+  "guest": "Daniel Zhang Sheng Paw",
+  "side": "male",
+  "check_in": "2026-10-14",
+  "check_out": "2026-10-17",
+  "beds": 1,
+  "status": "ok",
+  "booking_id": "702468215",
+  "payment": "Agoda Collect",
+  "listing": "Just for sleep daily 8pm to 10am-Male room"
+ },
+ {
+  "guest": "Aravind Koolagurki Thimmarayappa",
+  "side": "male",
+  "check_in": "2026-10-18",
+  "check_out": "2026-10-20",
+  "beds": 1,
+  "status": "ok",
+  "booking_id": "2048893025",
+  "payment": "Agoda Collect",
+  "listing": "Just for sleep daily stay 8pm to 10am-Male Dorm"
+ },
+ {
+  "guest": "Muhammad Zameer Khan",
+  "side": "male",
+  "check_in": "2026-10-20",
+  "check_out": "2026-10-22",
+  "beds": 1,
+  "status": "ok",
+  "booking_id": "2055948858",
+  "payment": "Agoda Collect",
+  "listing": "Just for sleep daily stay 8pm to 10am-Male Dorm"
+ },
+ {
+  "guest": "Ngango Alain",
+  "side": "male",
+  "check_in": "2026-10-27",
+  "check_out": "2026-11-06",
+  "beds": 1,
+  "status": "ok",
+  "booking_id": "704558351",
+  "payment": "Agoda Collect",
+  "listing": "Just for sleep- male dorm- daily stay 8pm to 10am"
+ },
+ {
+  "guest": "PATRICK NDATIMANA",
+  "side": "male",
+  "check_in": "2026-10-12",
+  "check_out": "2026-10-14",
+  "beds": 1,
+  "status": "ok",
+  "booking_id": "712350803",
+  "listing": "Agoda male dorm (screenshot Oct 12)"
+ },
+ {
+  "guest": "Vanessa L.",
+  "side": "male",
+  "check_in": "2026-10-13",
+  "check_out": "2026-10-14",
+  "beds": 1,
+  "status": "ok",
+  "booking_id": "712488055",
+  "listing": "Agoda male dorm (screenshot Oct 12)",
+  "flag": "female name on male dorm listing - possible gender mismatch"
+ },
+ {
+  "guest": "Mohammad Azharuddin",
+  "side": "male",
+  "check_in": "2026-10-15",
+  "check_out": "2026-10-16",
+  "beds": 1,
+  "status": "ok",
+  "booking_id": "712268323",
+  "listing": "Agoda male dorm (screenshot Oct 12)"
+ },
+ {
+  "guest": "matche angele BEUGRE",
+  "side": "male",
+  "check_in": "2026-10-19",
+  "check_out": "2026-10-23",
+  "beds": 1,
+  "status": "ok",
+  "booking_id": "712361451",
+  "listing": "Agoda male dorm (screenshot Oct 12)"
+ },
+ {
+  "guest": "ahmed amer",
+  "side": "male",
+  "check_in": "2026-10-25",
+  "check_out": "2026-10-29",
+  "beds": 1,
+  "status": "ok",
+  "booking_id": "711708791",
+  "listing": "Agoda male dorm (screenshot Oct 12)"
+ },
+ {
+  "guest": "Saeed Ghanbari",
+  "side": "male",
+  "check_in": "2026-10-18",
+  "check_out": "2026-10-23",
+  "beds": 1,
+  "status": "ok",
+  "booking_id": "714730115",
+  "payment": "Agoda Collect",
+  "listing": "67467632",
+  "source": "Royce chat 2026-10-18"
+ }
+]
