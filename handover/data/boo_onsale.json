@@ -1,0 +1,677 @@
+{
+ "saved_at": "2026-10-19T18:15:00+02:00",
+ "source": "Booking.com extranet, rooms to sell set by Royce",
+ "note": "Beds on sale on Booking.com per night (night = check-in date). Men: property 16844588, room 'Bed in Male Dormitory Room'. Women: Femme Girls 16840329 rooms to sell (real extranet read 17:20 Paris Oct 19; Nov 1-15 older values), injected as 'wbm'; women cap 8 (booked + wbm + wam <= 8). Nights absent from this file are unknown and are drawn as nothing. Injected into the page chart-data as row field 'bm' (men). Women are not drawn. See ONSALE_README.md.",
+ "men_hotel_id": "16844588",
+ "men_room": "Bed in Male Dormitory Room",
+ "men": {
+  "2026-10-06": 0,
+  "2026-10-07": 0,
+  "2026-10-08": 0,
+  "2026-10-09": 0,
+  "2026-10-10": 0,
+  "2026-10-11": 0,
+  "2026-10-12": 0,
+  "2026-10-13": 0,
+  "2026-10-14": 0,
+  "2026-10-15": 0,
+  "2026-10-16": 0,
+  "2026-10-17": 2,
+  "2026-10-18": 2,
+  "2026-10-19": 1,
+  "2026-10-20": 2,
+  "2026-10-21": 2,
+  "2026-10-22": 0,
+  "2026-10-23": 3,
+  "2026-10-24": 3,
+  "2026-10-25": 3,
+  "2026-10-26": 3,
+  "2026-10-27": 2,
+  "2026-10-28": 2,
+  "2026-10-29": 2,
+  "2026-10-30": 3,
+  "2026-10-31": 3,
+  "2026-11-01": 3,
+  "2026-11-02": 2,
+  "2026-11-03": 3,
+  "2026-11-04": 3,
+  "2026-11-05": 3
+ },
+ "women": {
+  "2026-10-06": 0,
+  "2026-10-07": 0,
+  "2026-10-08": 1,
+  "2026-10-09": 0,
+  "2026-10-10": 0,
+  "2026-10-11": 0,
+  "2026-10-12": 0,
+  "2026-10-13": 0,
+  "2026-10-14": 0,
+  "2026-10-15": 0,
+  "2026-10-16": 0,
+  "2026-10-17": 0,
+  "2026-10-18": 0,
+  "2026-10-19": 0,
+  "2026-10-20": 0,
+  "2026-10-21": 0,
+  "2026-10-22": 1,
+  "2026-10-23": 0,
+  "2026-10-24": 1,
+  "2026-10-25": 0,
+  "2026-10-26": 3,
+  "2026-10-27": 0,
+  "2026-10-28": 1,
+  "2026-10-29": 0,
+  "2026-10-30": 1,
+  "2026-10-31": 4,
+  "2026-11-01": 1,
+  "2026-11-02": 1,
+  "2026-11-03": 0,
+  "2026-11-04": 1,
+  "2026-11-05": 1,
+  "2026-11-06": 1,
+  "2026-11-07": 0,
+  "2026-11-08": 0,
+  "2026-11-09": 0,
+  "2026-11-10": 0,
+  "2026-11-11": 0,
+  "2026-11-12": 0,
+  "2026-11-13": 0,
+  "2026-11-14": 0,
+  "2026-11-15": 2,
+  "2026-11-16": 2,
+  "2026-11-17": 2,
+  "2026-11-18": 2,
+  "2026-11-19": 2,
+  "2026-11-20": 2,
+  "2026-11-21": 2,
+  "2026-11-22": 2,
+  "2026-11-23": 2,
+  "2026-11-24": 2,
+  "2026-11-25": 2,
+  "2026-11-26": 0,
+  "2026-11-27": 0,
+  "2026-11-28": 0,
+  "2026-11-29": 2,
+  "2026-11-30": 2,
+  "2026-12-01": 0,
+  "2026-12-02": 0,
+  "2026-12-03": 0,
+  "2026-12-04": 0,
+  "2026-12-05": 0,
+  "2026-12-06": 0,
+  "2026-12-07": 0,
+  "2026-12-08": 0,
+  "2026-12-09": 0,
+  "2026-12-10": 0,
+  "2026-12-11": 0,
+  "2026-12-12": 0,
+  "2026-12-13": 0,
+  "2026-12-14": 0,
+  "2026-12-15": 0,
+  "2026-12-16": 0,
+  "2026-12-17": 0,
+  "2026-12-18": 0,
+  "2026-12-19": 0,
+  "2026-12-20": 0,
+  "2026-12-21": 0,
+  "2026-12-22": 0,
+  "2026-12-23": 0,
+  "2026-12-24": 0,
+  "2026-12-25": 0,
+  "2026-12-26": 0,
+  "2026-12-27": 0,
+  "2026-12-28": 0,
+  "2026-12-29": 0,
+  "2026-12-30": 0,
+  "2026-12-31": 1
+ },
+ "log": [
+  {
+   "at": "2026-10-06T13:57+02:00",
+   "what": "Old one 16840329 women: 2 bookable/night Oct 7-Nov 4 (rooms to sell 3 on Oct 7-9 and 16-17 due to existing bookings)"
+  },
+  {
+   "at": "2026-10-06T15:29+02:00",
+   "what": "Old one 16840329 women: Mgba Saurelle (Booking.com res 5585664183, 1 bed, Oct 11-16, EUR 76.78) booked -> bookable 2->1 on nights Oct 11-15"
+  },
+  {
+   "at": "2026-10-06T16:45+02:00",
+   "what": "2026-10-06 16:45 Paris: verified/trimmed so men's booked+on-sale <= 22"
+  },
+  {
+   "at": "2026-10-06T18:05+02:00",
+   "what": "2026-10-06 ~18:05 Paris: 88 closed Oct 7-9 (cash guests Vincent/Kliton/Mmada/Karim not yet on calendar)"
+  },
+  {
+   "at": "2026-10-06T18:21+02:00",
+   "what": "2026-10-06 ~18:20 Paris: rooms-to-sell = open beds only; 88 closed Oct 7-16; Oct17+ bm 3 except Oct22 0; added missing 88 guests + cash Vincent/Kliton/Mmada/Karim"
+  },
+  {
+   "at": "2026-10-06T18:27+02:00",
+   "what": "Old one 16840329 women: Liguori Francesca (Booking.com res 5741411631, 1 adult, Oct 19-23, EUR 61.42) booked -> Booking auto-lowered rooms to sell 2->1 on nights Oct 19-22 (verified in extranet calendar)"
+  },
+  {
+   "at": "2026-10-06T18:27+02:00",
+   "what": "2026-10-06 ~18:25 Paris: Liguori Francesca royceb 5741411631 Oct19-23 women on-sale already 1 (kept)"
+  },
+  {
+   "at": "2026-10-06T19:23+02:00",
+   "what": "2026-10-06 ~19:20 Paris: bm cut to keep booked+bm+am≤23"
+  },
+  {
+   "at": "2026-10-07T04:36+02:00",
+   "what": "Old one 16840329 women: Fanny-Laure Ango res 6276997146 Oct 7-8 booked; Oct 7 rooms to sell 2->0 (Sold out) so women stay <=8 with Airbnb Female dormitory1 open"
+  },
+  {
+   "at": "2026-10-07T04:38+02:00",
+   "what": "Old one 16840329 women: Oct 8-9 rooms to sell 3->2 (Imane no-show still counted as booked by Boo; keeps 2/night rule)"
+  },
+  {
+   "at": "2026-10-08T04:16+02:00",
+   "what": "Old one 16840329 women: new res 5212936930 check-in Oct 9 (checkout unknown from mail); Booking auto-decrements, Oct 9 rooms to sell 2->1"
+  },
+  {
+   "at": "2026-10-08T12:22+02:00",
+   "what": "Old one 16840329 women: Nouha Dounia Laidani (Booking.com res 6470588326, check-in Oct 27, checkout not in mail) booked -> Booking auto-lowers rooms to sell 2->1 on Oct 27 (assumed from email; extranet signed out, not verified)"
+  },
+  {
+   "at": "2026-10-08T22:18:55+02:00",
+   "what": "Airbnb CONFIRMED HMSMH4DQAF Delphine Belli Female dorm1 Oct 10 only (payout EUR12.41); women booked 7->8 so trim Boo Old one 16840329 women on sale Oct 10 1->0 to keep booked+on sale <=8"
+  },
+  {
+   "at": "2026-10-08T23:24:46+02:00",
+   "what": "Royce closed Old one 16840329 women rooms to sell Oct 10 in Pulse (reported 05:2x CST Oct 9); women Oct 10 now 9 booked with Valeriia cash ext; on sale 0->0 (already 0, no change)"
+  },
+  {
+   "at": "2026-10-14T12:55+02:00",
+   "what": "Old one 16840329 women: new Booking res 5913138110 check-in Sat Oct 17 (name/checkout/payout not in mail; only Oct 17 counted) -> bookable 2->1 on Oct 17 (Booking auto-decrement assumed); women Oct 17 7 booked + 1 on sale = 8"
+  },
+  {
+   "at": "2026-10-15T08:09+02:00",
+   "what": "Old one 16840329 women: Hope Daly res 5198162732 Oct 20-21 (1 night; payout not in mail) -> bookable 1->0 on Oct 20 (Booking auto-decrement assumed); women Oct 20 7 booked + 0 Boo + target wam 1 = 8 (was wam 3; Airbnb close 2 needed)"
+  },
+  {
+   "at": "2026-10-15T13:28+02:00",
+   "what": "Old one women trim after Christelle HMJA2PHDMY: {'2026-11-14': (2, 1)} (cap booked+wbm+wam<=8)"
+  },
+  {
+   "at": "2026-10-15T18:29+02:00",
+   "what": "Old one 16840329 women: BELKADI AMEL res 6846141015 Oct 23-24 (1 night; €15.36, commission €2.69, ~€12.67 net) -> bookable 2->1 on Oct 23 (Booking auto-decrement assumed); women Oct 23 7 booked + 1 Boo + target wam 0 = 8 (was wam 2; Airbnb close 2 needed)"
+  },
+  {
+   "at": "2026-10-15T19:31+02:00",
+   "what": "men Booking on-sale trim after Airbnb HMCX8S8JFE Bryan Darboux Male (4): {'2026-10-19': (2, 1), '2026-10-20': (3, 2)} (page bm Oct19 5->4, Oct20 4->3; cap booked+bm+am<=23)"
+  },
+  {
+   "at": "2026-10-15T21:41+02:00",
+   "what": "Old one 16840329 women: Ivânia Soares pinto res 5303275878 Nov 21-28 (7 nights; €95.50, commission €16.70, ~€78.80 net ~€11.26/night) -> bookable 2->1 on Nov 21-27 (Booking auto-decrement assumed); women booked+Boo+wam {'2026-11-21': (2, 1, 3, 6), '2026-11-22': (3, 1, 3, 7), '2026-11-23': (2, 1, 3, 6), '2026-11-24': (2, 1, 4, 7), '2026-11-25': (1, 1, 4, 6), '2026-11-26': (1, 1, 3, 5), '2026-11-27': (1, 1, 4, 6)}"
+  },
+  {
+   "at": "2026-10-15T21:59+02:00",
+   "what": "Old one 16840329 women: VIOLET RODRIGUES res 5303248127 Oct 27-31 (4 nights; payout not in mail) -> bookable Oct27 1->0, Oct28-30 2->1 (Booking auto-decrement assumed); women booked+Boo+wam {'2026-10-27': (5, 0, 3, 8), '2026-10-28': (5, 1, 2, 8), '2026-10-29': (5, 1, 2, 8), '2026-10-30': (5, 1, 2, 8)}; Airbnb close Oct28×2 Oct29×1 Oct30×1 (listing names unknown)"
+  },
+  {
+   "at": "2026-10-15T22:30+02:00",
+   "what": "Old one 16840329 women: Ivânia Soares pinto res 5303275878 DATE CHANGE Nov 21-28 -> Oct 21-27 (6 nights): bookable Nov21-27 +1 (restore), Oct21-26 -1 floor 0 (Booking auto-adjust assumed)",
+   "nights": {
+    "2026-11-21": [
+     1,
+     2
+    ],
+    "2026-11-22": [
+     1,
+     2
+    ],
+    "2026-11-23": [
+     1,
+     2
+    ],
+    "2026-11-24": [
+     1,
+     2
+    ],
+    "2026-11-25": [
+     1,
+     2
+    ],
+    "2026-11-26": [
+     1,
+     2
+    ],
+    "2026-11-27": [
+     1,
+     2
+    ],
+    "2026-10-21": [
+     1,
+     0
+    ],
+    "2026-10-22": [
+     1,
+     0
+    ],
+    "2026-10-23": [
+     1,
+     0
+    ],
+    "2026-10-24": [
+     2,
+     1
+    ],
+    "2026-10-25": [
+     2,
+     1
+    ],
+    "2026-10-26": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "at": "2026-10-16T19:28+02:00",
+   "what": "Old one 16840329 women: N’guessan Andree Sonia Kla (res 5474472965) + Anna Tertel (res 6929541091), both last-minute 1 night Oct 16-17 -> Boo women Oct16 2->0; women Oct16 booked 7->9 of 8 (OVER CAP by 1)"
+  },
+  {
+   "at": "2026-10-17T02:45+08:00",
+   "what": "2026-10-16 20:24 Paris: NEW Booking Femme Girls (Old one 16840329) res 5621813791, check-in Sat Nov 7, name/nights/payout not in mail; Booking auto-decrement assumed, women Nov 7 on sale 2->1"
+  },
+  "2026-10-16 21:30 Paris: Booking Femme Girls res 5112043183 KARINA GARCIA VALENCIA Oct 31 -> Nov 10 (10 nights); Booking auto-decrement assumed, women on sale Oct 31 2->1 (page already 1), Nov 1-9 -1 each (Nov 7 1->0)",
+  "2026-10-16 23:44 Paris: women Oct17-Nov30 set from extranet readback + targets (Royce)",
+  {
+   "at": "2026-10-17T12:45+02:00",
+   "what": "Old one 16840329 women: NEW Booking res 5375450484 check-in Mon Oct 19 (name/checkout/payout not in mail; only Oct 19 counted) -> Booking auto-decrement 2->1 assumed; women Oct 19 booked 7->8 = full, so remaining Booking bed must close (target 0; extranet not signed in, close still needed)"
+  },
+  {
+   "at": "2026-10-17T13:52+02:00",
+   "what": "Audrey Chereau Booking res 6988034314 Femme Girls (Old one 16840329) Oct 19-21: women Oct19 8->9/8 OVERBOOKED (Booking had 1 bed still open there), Oct20 7->8 full -> wbm Oct20 2->0 (Booking auto -1, remaining 1 must be closed in extranet, not signed in)"
+  },
+  {
+   "at": "2026-10-17T16:47+02:00",
+   "what": "Celia Hamadi Booking res 5704621854 Femme Girls (Old one 16840329) Oct 18-19 (1 night): women Oct18 6->7/8, wbm Oct18 2->1 (Booking auto -1); booked 7 + Boo 1 + Airbnb 2 = 10, within cap"
+  },
+  {
+   "at": "2026-10-18T16:00+02:00",
+   "what": "5424457307 last-minute Femme Girls Oct 18: women 8/8 full, Booking auto -1 (1->0)"
+  },
+  {
+   "at": "2026-10-19T17:20+02:00",
+   "what": "women wbm replaced by real extranet read (Oct19-Oct31, Nov16-Dec31); cap 8, old limit-10 open item closed"
+  },
+  {
+   "at": "2026-10-20T13:08+02:00",
+   "what": "women Oct 21 1->0: Booking res 6070630998 (Hachani Siwar, Femme Girls) sold the last Booking women bed; women Oct 21 now 8/8 full, matches live page wbm=0"
+  },
+  {
+   "at": "2026-10-20T13:12+02:00",
+   "what": "women Nov 10-14 1->0: Booking res 5621813791 (Daniela Oliveira Barbosa, Femme Girls) Nov 7-15; Nov 8-9 already 0, Nov 7 unchanged (already counted); matches live wbm"
+  },
+  {
+   "at": "2026-10-21T15:28+02:00",
+   "what": "women Oct 21-26 +1: Booking res 5303275878 Ivânia Soares pinto (Femme Girls 16840329, Oct 21-27) CANCELLED 15:18 Paris; Booking auto-restore assumed; booked+wbm+wam = 8 each night",
+   "old": {
+    "2026-10-21": 0,
+    "2026-10-22": 0,
+    "2026-10-23": 0,
+    "2026-10-24": 0,
+    "2026-10-25": 0,
+    "2026-10-26": 4
+   },
+   "new": {
+    "2026-10-21": 1,
+    "2026-10-22": 1,
+    "2026-10-23": 1,
+    "2026-10-24": 1,
+    "2026-10-25": 1,
+    "2026-10-26": 5
+   }
+  },
+  {
+   "at": "2026-10-21T18:58+02:00",
+   "change": "women 2026-10-21 1->0: Booking last-minute res 6842791367 Femme Girls (auto-decrement assumed), women 8/8 FULL"
+  },
+  {
+   "at": "2026-10-22T09:12:17.408751+00:00",
+   "what": "Booking Femme Girls res 5357341826 check-in Nov 3 (checkout TBC): women wbm Nov 3 1->0 (Booking auto-decrement assumed)"
+  },
+  {
+   "at": "2026-10-23T01:00:02.137921+00:00",
+   "what": "Booking Femme Girls res 5967134087 check-in Oct 24 (checkout TBC): women wbm Oct 24 1->0 (Booking auto-decrement assumed)"
+  },
+  {
+   "at": "2026-10-23T13:19:25.841906+00:00",
+   "what": "Booking Femme Girls res 6771422215 Celenie Ruinet Oct 23-24 (1 night): women wbm Oct 23 1->0 (Booking auto-decrement assumed)"
+  },
+  {
+   "at": "2026-10-23T17:40:21+02:00",
+   "what": "Keti cash extend to Oct 28: trim wbm Oct26 5->4 (prefer cut wam first elsewhere)"
+  },
+  {
+   "at": "2026-10-24T12:19:17.307541+00:00",
+   "what": "Booking Femme Girls res 5983446886 check-in Oct 25 (checkout TBC): women wbm Oct 25 1->0 (Booking auto-decrement assumed)"
+  },
+  {
+   "at": "2026-10-24T12:27:02.388173+00:00",
+   "what": "Booking Femme Girls res 5983446886 Ana Karolayne da Silva Garcia Oct 25-27 (2n, €30.71): women wbm Oct 26 4->3 (Booking auto-decrement assumed)"
+  },
+  {
+   "at": "2026-10-24T12:35:01.832902+00:00",
+   "what": "Extranet read Femme Girls rooms-to-sell Oct24-31 {'2026-10-24': 1, '2026-10-25': 0, '2026-10-26': 3, '2026-10-27': 0, '2026-10-28': 1, '2026-10-29': 0, '2026-10-30': 1, '2026-10-31': 4} (was {'2026-10-24': 0, '2026-10-25': 0, '2026-10-26': 3, '2026-10-27': 1, '2026-10-28': 2, '2026-10-29': 1, '2026-10-30': 1, '2026-10-31': 3}); res 5967134087 Sandra Yaneth Carcamo De Nieto Oct 24-30"
+  }
+ ],
+ "adjustments": [
+  {
+   "at": "2026-10-08T14:32:00+02:00",
+   "nights": "2026-10-08",
+   "side": "women",
+   "delta": -1,
+   "why": "Booking Old one 16840329 last-minute res 5329109873 Nelly PHILIP Oct 8 (Booking auto-decrement assumed)"
+  },
+  {
+   "at": "2026-10-08T14:48:00+02:00",
+   "nights": "2026-10-09..2026-10-11",
+   "side": "women",
+   "delta": -1,
+   "why": "Booking Old one 16840329 res 5329109873 Nelly PHILIP extended to 4 nights Oct 8-12 (Royce confirmed; EUR61.42 ~EUR15.36/night; Booking auto-decrement assumed, same as Oct 8)"
+  },
+  {
+   "at": "2026-10-08T22:18:55+02:00",
+   "nights": "2026-10-10",
+   "side": "women",
+   "delta": -1,
+   "why": "Airbnb CONFIRMED HMSMH4DQAF Delphine Belli Female dorm1 Oct 10 only (payout EUR12.41); women booked 7->8 so trim Boo Old one 16840329 women on sale Oct 10 1->0 to keep booked+on sale <=8"
+  },
+  {
+   "at": "2026-10-08T23:24:46+02:00",
+   "nights": "2026-10-10",
+   "side": "women",
+   "delta": 0,
+   "why": "Royce closed Old one 16840329 women rooms to sell Oct 10 in Pulse (reported 05:2x CST Oct 9); women Oct 10 now 9 booked with Valeriia cash ext; on sale 0->0 (already 0, no change)"
+  },
+  {
+   "at": "2026-10-15T19:31:06+02:00",
+   "nights": "2026-10-19..2026-10-21",
+   "delta": -1,
+   "why": "trim bm after HMCX8S8JFE Bryan Darboux (am=0 nights; page bm Oct19 5->4, Oct20 4->3)"
+  },
+  {
+   "at": "2026-10-18T21:05:00+02:00",
+   "nights": "2026-10-21",
+   "side": "women",
+   "set": {
+    "2026-10-21": 1
+   },
+   "old": {
+    "2026-10-21": 2
+   },
+   "why": "Royce: women Oct 21 = 1 Booking + 0 Airbnb (7 booked + 1 = 8); data only, Booking extranet not touched"
+  },
+  {
+   "at": "2026-10-18T22:58:00+02:00",
+   "nights": "2026-11-26..2026-11-28",
+   "side": "women",
+   "set": {
+    "2026-11-26": 4,
+    "2026-11-27": 4,
+    "2026-11-28": 4
+   },
+   "old": {
+    "2026-11-26": 7,
+    "2026-11-27": 8,
+    "2026-11-28": 8
+   },
+   "why": "Booking res 6817017597 Briyith Nineth Merida Chan 2 beds Nov 26-29 EUR 92.13; target booked 2 + Boo 4 + Airbnb 2 = 8; Royce to close extra beds in extranet (data only)"
+  },
+  {
+   "at": "2026-10-19T17:20:00+02:00",
+   "side": "women",
+   "set": {
+    "2026-10-19": 0,
+    "2026-10-20": 0,
+    "2026-10-21": 1,
+    "2026-10-22": 0,
+    "2026-10-23": 0,
+    "2026-10-24": 2,
+    "2026-10-25": 2,
+    "2026-10-26": 4,
+    "2026-10-27": 3,
+    "2026-10-28": 4,
+    "2026-10-29": 4,
+    "2026-10-30": 3,
+    "2026-10-31": 4,
+    "2026-11-16": 2,
+    "2026-11-17": 2,
+    "2026-11-18": 2,
+    "2026-11-19": 2,
+    "2026-11-20": 2,
+    "2026-11-21": 2,
+    "2026-11-22": 2,
+    "2026-11-23": 2,
+    "2026-11-24": 2,
+    "2026-11-25": 2,
+    "2026-11-26": 0,
+    "2026-11-27": 0,
+    "2026-11-28": 0,
+    "2026-11-29": 2,
+    "2026-11-30": 2,
+    "2026-12-01": 0,
+    "2026-12-02": 0,
+    "2026-12-03": 0,
+    "2026-12-04": 0,
+    "2026-12-05": 0,
+    "2026-12-06": 0,
+    "2026-12-07": 0,
+    "2026-12-08": 0,
+    "2026-12-09": 0,
+    "2026-12-10": 0,
+    "2026-12-11": 0,
+    "2026-12-12": 0,
+    "2026-12-13": 0,
+    "2026-12-14": 0,
+    "2026-12-15": 0,
+    "2026-12-16": 0,
+    "2026-12-17": 0,
+    "2026-12-18": 0,
+    "2026-12-19": 0,
+    "2026-12-20": 0,
+    "2026-12-21": 0,
+    "2026-12-22": 0,
+    "2026-12-23": 0,
+    "2026-12-24": 0,
+    "2026-12-25": 0,
+    "2026-12-26": 0,
+    "2026-12-27": 0,
+    "2026-12-28": 0,
+    "2026-12-29": 0,
+    "2026-12-30": 0,
+    "2026-12-31": 1
+   },
+   "old": {
+    "2026-10-19": 0,
+    "2026-10-20": 0,
+    "2026-10-21": 1,
+    "2026-10-22": 0,
+    "2026-10-23": 0,
+    "2026-10-24": 2,
+    "2026-10-25": 2,
+    "2026-10-26": 4,
+    "2026-10-27": 3,
+    "2026-10-28": 4,
+    "2026-10-29": 3,
+    "2026-10-30": 3,
+    "2026-10-31": 4,
+    "2026-11-16": 7,
+    "2026-11-17": 7,
+    "2026-11-18": 7,
+    "2026-11-19": 6,
+    "2026-11-20": 6,
+    "2026-11-21": 7,
+    "2026-11-22": 6,
+    "2026-11-23": 7,
+    "2026-11-24": 7,
+    "2026-11-25": 8,
+    "2026-11-26": 4,
+    "2026-11-27": 4,
+    "2026-11-28": 4,
+    "2026-11-29": 8,
+    "2026-11-30": 8,
+    "2026-12-01": null,
+    "2026-12-02": null,
+    "2026-12-03": null,
+    "2026-12-04": null,
+    "2026-12-05": null,
+    "2026-12-06": null,
+    "2026-12-07": null,
+    "2026-12-08": null,
+    "2026-12-09": null,
+    "2026-12-10": null,
+    "2026-12-11": null,
+    "2026-12-12": null,
+    "2026-12-13": null,
+    "2026-12-14": null,
+    "2026-12-15": null,
+    "2026-12-16": null,
+    "2026-12-17": null,
+    "2026-12-18": null,
+    "2026-12-19": null,
+    "2026-12-20": null,
+    "2026-12-21": null,
+    "2026-12-22": null,
+    "2026-12-23": null,
+    "2026-12-24": null,
+    "2026-12-25": null,
+    "2026-12-26": null,
+    "2026-12-27": null,
+    "2026-12-28": null,
+    "2026-12-29": null,
+    "2026-12-30": null,
+    "2026-12-31": null
+   },
+   "why": "Royce: real Booking extranet read Femme Girls 16840329 rooms to sell, 17:20 Paris Oct 19 (Nov 1-15 not read, kept)"
+  },
+  {
+   "at": "2026-10-19T18:04:00+02:00",
+   "side": "women",
+   "set": {
+    "2026-10-24": 0,
+    "2026-10-25": 0,
+    "2026-10-26": 4,
+    "2026-10-27": 1,
+    "2026-10-28": 4,
+    "2026-10-29": 1,
+    "2026-10-30": 1,
+    "2026-10-31": 4,
+    "2026-11-01": 1,
+    "2026-11-02": 1,
+    "2026-11-03": 1,
+    "2026-11-04": 1,
+    "2026-11-05": 1,
+    "2026-11-06": 1,
+    "2026-11-07": 1,
+    "2026-11-08": 0,
+    "2026-11-09": 0,
+    "2026-11-10": 1,
+    "2026-11-11": 1,
+    "2026-11-12": 1,
+    "2026-11-13": 1,
+    "2026-11-14": 1,
+    "2026-11-15": 2
+   },
+   "old": {
+    "2026-10-24": 2,
+    "2026-10-25": 2,
+    "2026-10-26": 4,
+    "2026-10-27": 3,
+    "2026-10-28": 4,
+    "2026-10-29": 4,
+    "2026-10-30": 3,
+    "2026-10-31": 4,
+    "2026-11-01": 5,
+    "2026-11-02": 5,
+    "2026-11-03": 4,
+    "2026-11-04": 3,
+    "2026-11-05": 3,
+    "2026-11-06": 3,
+    "2026-11-07": 1,
+    "2026-11-08": 4,
+    "2026-11-09": 4,
+    "2026-11-10": 6,
+    "2026-11-11": 6,
+    "2026-11-12": 6,
+    "2026-11-13": 6,
+    "2026-11-14": 5,
+    "2026-11-15": 6
+   },
+   "why": "Royce: real Femme Girls 16840329 rooms to sell read 18:04 Paris Oct 19 (not yet published)"
+  },
+  {
+   "at": "2026-10-19T18:15:00+02:00",
+   "side": "women",
+   "set": {
+    "2026-10-28": 2
+   },
+   "old": {
+    "2026-10-28": 4
+   },
+   "why": "Royce lowered Femme Girls 16840329 Oct 28 in Pulse; extranet reads 2"
+  },
+  {
+   "at": "2026-10-23T17:40:21+02:00",
+   "side": "women",
+   "set": {
+    "2026-10-23": 0,
+    "2026-10-24": 0,
+    "2026-10-25": 1,
+    "2026-10-26": 4,
+    "2026-10-27": 1
+   },
+   "old": {
+    "2026-10-23": 0,
+    "2026-10-24": 0,
+    "2026-10-25": 1,
+    "2026-10-26": 5,
+    "2026-10-27": 1
+   },
+   "why": "Keti cash extend to Oct 28"
+  },
+  {
+   "at": "2026-10-23T23:18:31+02:00",
+   "nights": "2026-10-31..2026-11-30",
+   "delta": "trim for Siliadin cash",
+   "why": "Siliadin Anssan cash +1mo €400",
+   "trims": {
+    "2026-10-31": [
+     0,
+     0,
+     4,
+     3
+    ],
+    "2026-11-04": [
+     2,
+     1,
+     1,
+     1
+    ],
+    "2026-11-05": [
+     2,
+     1,
+     1,
+     1
+    ],
+    "2026-11-06": [
+     2,
+     1,
+     1,
+     1
+    ],
+    "2026-11-07": [
+     0,
+     0,
+     1,
+     0
+    ]
+   }
+  }
+ ]
+}

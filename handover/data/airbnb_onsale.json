@@ -1,0 +1,773 @@
+{
+ "saved_at": "2026-10-06T11:45:00+02:00",
+ "read_at": "2026-10-06T11:43:00+02:00",
+ "read_at_label": "11:43 Paris, Oct 6",
+ "source": "Airbnb host calendar, read by Royce",
+ "men_listings": 17,
+ "note": "Men's Airbnb listings open (listed, unblocked) and unbooked per night (night = check-in date); each listing = 1 bed. 17 listed men's listings at read time. Nights absent from this file are unknown and are drawn as nothing. Injected into the page chart-data as row field 'am' (men). Routine rule: new men's Airbnb booking -> lower by 1 for each night of the stay (min 0); men's Airbnb cancellation -> raise by 1 per night. See ONSALE_README.md.",
+ "men": {
+  "2026-10-06": 0,
+  "2026-10-07": 0,
+  "2026-10-08": 0,
+  "2026-10-09": 2,
+  "2026-10-10": 0,
+  "2026-10-11": 2,
+  "2026-10-12": 3,
+  "2026-10-13": 0,
+  "2026-10-14": 0,
+  "2026-10-15": 3,
+  "2026-10-16": 2,
+  "2026-10-17": 1,
+  "2026-10-18": 0,
+  "2026-10-19": 0,
+  "2026-10-20": 0,
+  "2026-10-21": 0,
+  "2026-10-22": 1,
+  "2026-10-23": 5,
+  "2026-10-24": 2,
+  "2026-10-25": 6,
+  "2026-10-26": 2,
+  "2026-10-27": 2,
+  "2026-10-28": 3,
+  "2026-10-29": 5,
+  "2026-10-30": 9,
+  "2026-10-31": 12,
+  "2026-11-01": 14,
+  "2026-11-02": 13,
+  "2026-11-03": 11,
+  "2026-11-04": 11
+ },
+ "adjustments": [
+  {
+   "at": "2026-10-06T12:10:00+02:00",
+   "recorded_at": "2026-10-06T12:12:56+02:00",
+   "nights": "2026-10-06..2026-10-15",
+   "set": {
+    "2026-10-06": 0,
+    "2026-10-07": 1,
+    "2026-10-08": 4,
+    "2026-10-09": 6,
+    "2026-10-10": 5,
+    "2026-10-11": 3,
+    "2026-10-12": 2,
+    "2026-10-13": 0,
+    "2026-10-14": 0
+   },
+   "old": {
+    "2026-10-06": 3,
+    "2026-10-07": 7,
+    "2026-10-08": 10,
+    "2026-10-09": 12,
+    "2026-10-10": 12,
+    "2026-10-11": 11,
+    "2026-10-12": 10,
+    "2026-10-13": 8,
+    "2026-10-14": 11
+   },
+   "why": "blocked extra men's Airbnb listings to keep total <=22; see airbnb-trim-plan-20261006.json"
+  },
+  {
+   "at": "2026-10-06T12:24:00+02:00",
+   "recorded_at": "2026-10-06T12:24:33+02:00",
+   "nights": "2026-10-15..2026-11-05",
+   "set": {
+    "2026-10-15": 6,
+    "2026-10-16": 6,
+    "2026-10-17": 5,
+    "2026-10-18": 7,
+    "2026-10-19": 5,
+    "2026-10-20": 5,
+    "2026-10-21": 7,
+    "2026-10-22": 10,
+    "2026-10-23": 11,
+    "2026-10-24": 11,
+    "2026-10-25": 11,
+    "2026-10-26": 11,
+    "2026-10-27": 11,
+    "2026-10-28": 11,
+    "2026-10-29": 12,
+    "2026-10-30": 13,
+    "2026-10-31": 14,
+    "2026-11-01": 15,
+    "2026-11-02": 15,
+    "2026-11-03": 13,
+    "2026-11-04": 13
+   },
+   "old": {
+    "2026-10-15": 14,
+    "2026-10-16": 13,
+    "2026-10-17": 11,
+    "2026-10-18": 12,
+    "2026-10-19": 11,
+    "2026-10-20": 11,
+    "2026-10-21": 11,
+    "2026-10-22": 12,
+    "2026-10-23": 13,
+    "2026-10-24": 13,
+    "2026-10-25": 13,
+    "2026-10-26": 14,
+    "2026-10-27": 14,
+    "2026-10-28": 14,
+    "2026-10-29": 14,
+    "2026-10-30": 15,
+    "2026-10-31": 16,
+    "2026-11-01": 16,
+    "2026-11-02": 16,
+    "2026-11-03": 16,
+    "2026-11-04": 16
+   },
+   "why": "second batch of men's Airbnb blocks at 12:24 Paris + fresh recount; see airbnb-trim-plan-20261006.json (open_after_trim_1224)"
+  },
+  {
+   "at": "2026-10-06T17:40:00+02:00",
+   "recorded_at": "2026-10-06T17:37:51+02:00",
+   "nights": "2026-10-07..2026-10-15",
+   "delta": 1,
+   "why": "Airbnb listing Male (8) opened Oct 7-14 for Ruben (checkout Oct 15)"
+  },
+  {
+   "at": "2026-10-06T18:05:28+02:00",
+   "recorded_at": "2026-10-06T18:05:28+02:00",
+   "nights": "2026-10-07..2026-10-10",
+   "delta": -1,
+   "why": "Male (7) blocked Oct 7-9"
+  },
+  {
+   "at": "2026-10-06T18:14:14+02:00",
+   "recorded_at": "2026-10-06T18:14:14+02:00",
+   "nights": "2026-10-06..2026-10-07",
+   "delta": 1,
+   "why": "Male (8) opened Oct 6 for Ruben, 18:13 Paris"
+  },
+  {
+   "at": "2026-10-06T19:23:19+02:00",
+   "recorded_at": "2026-10-06T19:23:19+02:00",
+   "nights": "2026-10-06,2026-10-07,2026-10-13,2026-10-22",
+   "delta": -1,
+   "why": "Male (8) blocked Oct 6,7,13; Male (2) blocked Oct 22"
+  },
+  {
+   "at": "2026-10-06T21:59:20+02:00",
+   "nights": "2026-10-06,2026-10-07,2026-10-13",
+   "set": {
+    "2026-10-06": 1,
+    "2026-10-07": 1,
+    "2026-10-13": 1
+   },
+   "old": {
+    "2026-10-06": 0,
+    "2026-10-07": 0,
+    "2026-10-13": 0
+   },
+   "why": "Male 8 (1749504066860203908) opened by Airbnb manager for Ruben Oct 6/7/13; Male 9 stayed blocked; Jhon HMQ2RNRNX8 cancel kept am from auto +1"
+  },
+  {
+   "at": "2026-10-06T22:43:36+02:00",
+   "recorded_at": "2026-10-06T22:43:36+02:00",
+   "nights": "2026-10-06,07,13",
+   "delta": -1,
+   "code": "HM2YTQEAMA",
+   "why": "Ruben Nino Y Gonzalez HM2YTQEAMA Male8 confirmed Oct6-8 (nights 6-7); am→0 those nights + drop Oct13 Male8 hold (no Oct6-15 extension)",
+   "old": {
+    "2026-10-06": 1,
+    "2026-10-07": 1,
+    "2026-10-13": 1
+   },
+   "set": {
+    "2026-10-06": 0,
+    "2026-10-07": 0,
+    "2026-10-13": 0
+   }
+  },
+  {
+   "at": "2026-10-07T13:46:55+02:00",
+   "nights": "2026-10-10..2026-10-11",
+   "delta": -1,
+   "why": "HMWBXX8T2Z Wasikahmed Khan Male (11) Oct 10-11"
+  },
+  {
+   "at": "2026-10-07T15:46:08+02:00",
+   "nights": "2026-10-10..2026-10-11",
+   "delta": -1,
+   "why": "HMH3DCEHSS Aymane Moumen Male (8) Oct 10-11"
+  },
+  {
+   "at": "2026-10-07T16:54:16+02:00",
+   "nights": "2026-10-09..2026-10-12",
+   "delta": -1,
+   "why": "HMCCM3DB5E Aaron Romero Male daily dormitory (12) Oct 9-12"
+  },
+  {
+   "at": "2026-10-07T21:02:59+02:00",
+   "nights": "2026-10-08..2026-10-12",
+   "delta": -1,
+   "why": "HM84YSRPQH Yohan Ewany Male dormitory Metro 5 (1) Oct 8-12"
+  },
+  {
+   "at": "2026-10-07T21:30:47+02:00",
+   "nights": "2026-10-26..2026-10-29",
+   "delta": -1,
+   "why": "HM9PSKYHST Remy Araux Male dormitory Metro 5 (18) Oct 26-29"
+  },
+  {
+   "at": "2026-10-07T22:00:50+02:00",
+   "nights": "2026-10-08..2026-10-10",
+   "delta": -1,
+   "why": "Multi-OTA 2 blocking Airbnb Male 8 (1749504066860203908) Oct 8-9 for cash Ruben Oct 8-15 (Royce OK)"
+  },
+  {
+   "at": "2026-10-07T22:00:50+02:00",
+   "nights": "2026-10-10..2026-10-11",
+   "delta": -2,
+   "why": "Multi-OTA 2 blocking Airbnb Male 7 (1750243370294902289) + Male 16 (1753163665063744524) Oct 10 (Agoda RONGHUA ZHANG + cash Ruben, cap 23)"
+  },
+  {
+   "at": "2026-10-08T14:19:33+02:00",
+   "nights": "2026-10-08..2026-10-09",
+   "delta": -1,
+   "why": "Khaldoun cash Oct 8, Multi-OTA 2 blocking 1 Airbnb men bed, cap 23"
+  },
+  {
+   "at": "2026-10-08T14:19:33+02:00",
+   "nights": "2026-10-08..2026-10-10",
+   "delta": -1,
+   "why": "Airbnb CONFIRMED HMYXCFX5XN Daniel Rojas Amado Male (4) Oct 8-10 (nights 8-9), booked on-sale bed"
+  },
+  {
+   "at": "2026-10-08T18:08:36+02:00",
+   "nights": "2026-10-14..2026-10-15",
+   "delta": -1,
+   "why": "Airbnb CONFIRMED HM82BEF8EA Sebastien Bougnaud Male (8) Oct 13-15 (nights 13-14), booked on-sale bed; Oct 13 am already 0 (Male 8 not counted there), left at 0"
+  },
+  {
+   "at": "2026-10-09T08:33:08+02:00",
+   "nights": "2026-10-29..2026-10-31",
+   "delta": -1,
+   "why": "Wilmer Ibague HMHATDDX39 booked Male (18) Oct 29-Nov 1 (Airbnb auto-blocks); synced to match live page published 08:18 Paris"
+  },
+  {
+   "at": "2026-10-12T14:39:02+02:00",
+   "nights": "2026-10-20..2026-10-21",
+   "delta": -1,
+   "why": "HMEHD2H3R5 Mathieu Decouflet Male (21)"
+  },
+  {
+   "at": "2026-10-15T03:27:13+02:00",
+   "nights": "2026-10-15..2026-10-16",
+   "delta": -1,
+   "why": "HM8NSKMKS4 Hamed Razak Diomande Male (18) Oct 15-16"
+  },
+  {
+   "at": "2026-10-15T14:53:52+02:00",
+   "nights": "2026-10-16..2026-10-18",
+   "delta": -1,
+   "why": "HM9J4ZMJHS Cheikh Diop Male (22) Oct 16-18"
+  },
+  {
+   "at": "2026-10-15T15:21:55+02:00",
+   "nights": "2026-10-15..2026-10-17",
+   "delta": -1,
+   "why": "HMD2P5MDQP Guirec Recoursé Male (7) Oct 15-17"
+  },
+  {
+   "at": "2026-10-15T19:13:43+02:00",
+   "nights": "2026-10-16..2026-10-18",
+   "delta": 1,
+   "why": "CANCEL HM9J4ZMJHS Cheikh Diop Male (22)"
+  },
+  {
+   "at": "2026-10-15T19:31:06+02:00",
+   "nights": "2026-10-15..2026-10-23",
+   "delta": -1,
+   "why": "HMCX8S8JFE Bryan Darboux Male (4) Oct 15-23"
+  },
+  {
+   "at": "2026-10-16T08:17:26+02:00",
+   "nights": "2026-10-17..2026-10-18",
+   "delta": -1,
+   "why": "HMKXFRSXRT 田中 桂太 Male (22) Oct 17-18"
+  },
+  {
+   "at": "2026-10-16T10:56:15+02:00",
+   "nights": "2026-10-16..2026-10-17",
+   "delta": -1,
+   "why": "HM9EFNZXP9 Adel Bouziane Male (18) Oct 16-17"
+  },
+  {
+   "at": "2026-10-16T23:57:56+02:00",
+   "nights": "2026-10-16..2026-10-17",
+   "delta": -1,
+   "why": "HMSXWAT85P Assi Assienin Male (22) Oct 16-17"
+  },
+  {
+   "at": "2026-10-17T16:29:46+02:00",
+   "nights": "2026-10-17..2026-10-18",
+   "delta": -1,
+   "why": "HMFE44K95Q Manoel Messias Silva Male (12) Oct 17-18"
+  },
+  {
+   "at": "2026-10-17T18:23:00+02:00",
+   "nights": "2026-10-17..2026-10-18",
+   "delta": -1,
+   "why": "HMHTXHTNNY Anaïs Jousset Male (3) Oct 17-18"
+  },
+  {
+   "at": "2026-10-17T18:52:00+02:00",
+   "nights": "2026-10-19..2026-10-21",
+   "delta": -1,
+   "why": "HMJ2BZFKBX Karim Diomande Male (2) Oct 19-22"
+  },
+  {
+   "at": "2026-10-17T18:55:00+02:00",
+   "nights": "2026-10-21",
+   "set": 4,
+   "from": 5,
+   "why": "Airbnb manager blocked 8 men beds Oct 21; open: Male (3),(7),(8),(12)"
+  },
+  {
+   "at": "2026-10-18T14:48:00+02:00",
+   "nights": "2026-10-18..2026-10-19",
+   "delta": -1,
+   "why": "HM4X5FSPN3 Guirec Recoursé Male (7) Oct 18-19"
+  },
+  {
+   "at": "2026-10-18T18:00:00+02:00",
+   "nights": "2026-10-18..2026-10-20",
+   "set": {
+    "2026-10-18": 0,
+    "2026-10-19": 0,
+    "2026-10-20": 0
+   },
+   "old": {
+    "2026-10-18": 3,
+    "2026-10-19": 1,
+    "2026-10-20": 0
+   },
+   "why": "Airbnb manager blocked all 23 men's Airbnb listings (no price) for Oct 18, 19, 20 (Royce)"
+  },
+  {
+   "at": "2026-10-18T20:45:00+02:00",
+   "nights": "2026-10-21..2026-10-22",
+   "set": {
+    "2026-10-21": 2,
+    "2026-10-22": 2
+   },
+   "old": {
+    "2026-10-21": 4,
+    "2026-10-22": 8
+   },
+   "why": "Royce: 2 men's Airbnb beds on sale Oct 21 and Oct 22 (page am was 4 / 0). Men booked 18/17 + 3 on beds only (Kamel, Nader, Mohammad) = 21/20; +2 = 23/22 <= 23. Airbnb itself not changed by us."
+  },
+  {
+   "at": "2026-10-20T13:40:56+02:00",
+   "recorded_at": "2026-10-20T13:44:56+02:00",
+   "nights": "2026-10-25",
+   "set": {
+    "2026-10-25": 11
+   },
+   "old": {
+    "2026-10-25": 10
+   },
+   "why": "Airbnb cancel HM9W8B23KX François Tournier Male (2) Oct 25-26; Airbnb reopened the dates"
+  },
+  {
+   "at": "2026-10-22T02:44:54+02:00",
+   "nights": "2026-11-18..2026-11-19",
+   "delta": -1,
+   "why": "HMRSXCFWMT Elkin Jair (file has no Nov 18 key; page am 17->16)"
+  },
+  {
+   "at": "2026-10-22T14:06+02:00",
+   "nights": "2026-10-23..2026-10-30",
+   "delta": -2,
+   "why": "Airbnb host blocks ~12:14 Paris Oct 22 (Chrome) on 'Male daily dormitory from 8pm to 10am Métro 5 (12)' and 'Male dormitory daily stay from 8PM to 11AM (26)', nights Oct 23-30: men am -2"
+  }
+ ],
+ "log": [
+  {
+   "at": "2026-10-18T21:47+02:00",
+   "what": "Meysam HMM2AERETH Male (3) Oct21-30 booked (Royce accepted): men am -1 Oct21-29",
+   "nights": {
+    "2026-10-21": [
+     2,
+     1
+    ],
+    "2026-10-22": [
+     2,
+     1
+    ],
+    "2026-10-23": [
+     11,
+     10
+    ],
+    "2026-10-24": [
+     11,
+     10
+    ],
+    "2026-10-25": [
+     11,
+     10
+    ],
+    "2026-10-26": [
+     10,
+     9
+    ],
+    "2026-10-27": [
+     10,
+     9
+    ],
+    "2026-10-28": [
+     10,
+     9
+    ],
+    "2026-10-29": [
+     11,
+     10
+    ]
+   }
+  },
+  {
+   "at": "2026-10-20T15:36+02:00",
+   "what": "Yohan Ewany HMQPDFZSTT Male (7) Oct21-31 booked (Airbnb confirm 13:21:57Z, payout €144.07): men am -1 Oct21-30 (live page already published by another run at cv 2026-10-20T13:24:16Z)",
+   "nights": {
+    "2026-10-21": [
+     1,
+     0
+    ],
+    "2026-10-22": [
+     1,
+     0
+    ],
+    "2026-10-23": [
+     10,
+     9
+    ],
+    "2026-10-24": [
+     10,
+     9
+    ],
+    "2026-10-25": [
+     11,
+     10
+    ],
+    "2026-10-26": [
+     9,
+     8
+    ],
+    "2026-10-27": [
+     9,
+     8
+    ],
+    "2026-10-28": [
+     9,
+     8
+    ],
+    "2026-10-29": [
+     10,
+     9
+    ],
+    "2026-10-30": [
+     12,
+     11
+    ]
+   }
+  },
+  {
+   "at": "2026-10-22T13:32+02:00",
+   "what": "Sebastien Bougnaud HMBMCR5PMC Male (8) Nov2-5 booked (Airbnb confirm 11:20:07Z, payout €41.51): men am -1 Nov2-4",
+   "nights": {
+    "2026-11-02": [
+     15,
+     14
+    ],
+    "2026-11-03": [
+     13,
+     12
+    ],
+    "2026-11-04": [
+     13,
+     12
+    ]
+   }
+  },
+  {
+   "at": "2026-10-22T13:59+02:00",
+   "what": "Haji Mare HMFQDYZXE2 Male (18) Oct24-26 booked (Airbnb confirm 11:57:48Z, payout €29.30): men am -1 Oct24-25",
+   "nights": {
+    "2026-10-24": [
+     9,
+     8
+    ],
+    "2026-10-25": [
+     10,
+     9
+    ]
+   }
+  },
+  {
+   "at": "2026-10-22T14:06+02:00",
+   "what": "Airbnb host blocks ~12:14 Paris Oct 22 (Chrome) on 'Male daily dormitory from 8pm to 10am Métro 5 (12)' and 'Male dormitory daily stay from 8PM to 11AM (26)', nights Oct 23-30: men am -2",
+   "nights": {
+    "2026-10-23": [
+     9,
+     7
+    ],
+    "2026-10-24": [
+     8,
+     6
+    ],
+    "2026-10-25": [
+     9,
+     7
+    ],
+    "2026-10-26": [
+     8,
+     6
+    ],
+    "2026-10-27": [
+     8,
+     6
+    ],
+    "2026-10-28": [
+     8,
+     6
+    ],
+    "2026-10-29": [
+     9,
+     7
+    ],
+    "2026-10-30": [
+     11,
+     9
+    ]
+   }
+  },
+  {
+   "at": "2026-10-22T18:19+02:00",
+   "what": "Hugo Garric HMXEZ3AXAA Male (8) Oct24-25 booked (Airbnb confirm 16:16:52Z, payout €13.83): men am -1 Oct24",
+   "nights": {
+    "2026-10-24": [
+     6,
+     5
+    ]
+   }
+  },
+  {
+   "at": "2026-10-22T20:12+02:00",
+   "what": "Frank Tchantchou HMJNQZDTYF Male (9) Oct31-Nov1 booked (Airbnb confirm 18:10:22Z, payout €13.83): men am -1 Oct31",
+   "nights": {
+    "2026-10-31": [
+     13,
+     12
+    ]
+   }
+  },
+  {
+   "at": "2026-10-22T23:58+02:00",
+   "what": "Carvalho Da Silva Lima HMMTNRA39W Male (9) Oct22-26 CANCELED (Airbnb 21:45:58Z, payout updated €36.34): men am +1 Oct22-25",
+   "nights": {
+    "2026-10-22": [
+     0,
+     1
+    ],
+    "2026-10-23": [
+     7,
+     8
+    ],
+    "2026-10-24": [
+     5,
+     6
+    ],
+    "2026-10-25": [
+     7,
+     8
+    ]
+   }
+  },
+  {
+   "at": "2026-10-23T10:32+02:00",
+   "what": "Bryan Darboux HMDJ9KBAHA Male (4) Oct26-30 booked (returning/extend): men am -1 Oct26-29 (sync file to live page already published cv 2026-10-23T08:23:18Z)",
+   "nights": {
+    "2026-10-26": [
+     6,
+     5
+    ],
+    "2026-10-27": [
+     6,
+     5
+    ],
+    "2026-10-28": [
+     6,
+     5
+    ],
+    "2026-10-29": [
+     7,
+     7
+    ]
+   }
+  },
+  {
+   "at": "2026-10-23T10:44+02:00",
+   "what": "真斗 後藤 HMJ9FRQT3B Male (9) Oct23-24 booked (Airbnb confirm 08:34:33Z, payout €10.50): men am -1 Oct23",
+   "nights": {
+    "2026-10-23": [
+     8,
+     7
+    ]
+   }
+  },
+  {
+   "at": "2026-10-23T11:49+02:00",
+   "what": "Miguel Angel Zegarra Rivera HMX984PCQW booked (Airbnb confirm mail): men am -1 2026-10-25,2026-10-26,2026-10-27",
+   "nights": {
+    "2026-10-25": [
+     8,
+     7
+    ],
+    "2026-10-26": [
+     5,
+     4
+    ],
+    "2026-10-27": [
+     5,
+     4
+    ]
+   }
+  },
+  {
+   "at": "2026-10-23T11:49+02:00",
+   "what": "Jizreel Monfre HMKZ4N5C3Z booked (Airbnb confirm mail): men am -1 2026-10-23,2026-10-24",
+   "nights": {
+    "2026-10-23": [
+     7,
+     6
+    ],
+    "2026-10-24": [
+     6,
+     5
+    ]
+   }
+  },
+  {
+   "at": "2026-10-23T11:57+02:00",
+   "what": "Saeed Ghanbari HMYQ43ATSJ booked (Airbnb confirm mail): men am -1 2026-10-23,2026-10-24,2026-10-25,2026-10-26,2026-10-27,2026-10-28,2026-10-29",
+   "nights": {
+    "2026-10-23": [
+     6,
+     5
+    ],
+    "2026-10-24": [
+     5,
+     4
+    ],
+    "2026-10-25": [
+     7,
+     6
+    ],
+    "2026-10-26": [
+     4,
+     3
+    ],
+    "2026-10-27": [
+     4,
+     3
+    ],
+    "2026-10-28": [
+     5,
+     4
+    ],
+    "2026-10-29": [
+     7,
+     6
+    ]
+   }
+  },
+  {
+   "at": "2026-10-23T14:35+02:00",
+   "what": "Karim Diomande HMYXD2EQXY booked (Airbnb confirm mail): men am -1 2026-10-26,2026-10-27,2026-10-28,2026-10-29",
+   "nights": {
+    "2026-10-26": [
+     3,
+     2
+    ],
+    "2026-10-27": [
+     3,
+     2
+    ],
+    "2026-10-28": [
+     4,
+     3
+    ],
+    "2026-10-29": [
+     6,
+     5
+    ]
+   }
+  },
+  {
+   "at": "2026-10-23T16:16+02:00",
+   "what": "Guirec Recoursé HMSA38SQRM Male (2) Oct23-24 booked (Airbnb confirm 14:04:04Z, payout €10.99): men am -1 Oct23",
+   "nights": {
+    "2026-10-23": [
+     5,
+     4
+    ]
+   },
+   "note": "dedup: concurrent bed-calendar run also decremented; corrected to single -1 (5->4)"
+  },
+  {
+   "at": "2026-10-23T19:35+02:00",
+   "what": "Fouad Belabeddou HMMEPXXAQY Male (8) Oct23-24 booked (confirm 17:20:29Z, €12.70); page already published am 5->4 at 17:26:57Z; file Oct23 already 4 = page, left unchanged",
+   "nights": {}
+  },
+  {
+   "at": "2026-10-23T23:02+02:00",
+   "what": "Fouad Belabeddou HMMEPXXAQY Male Métro 5 (8) Oct23-24 CANCELLED by guest (email 20:53:21Z, payout stays €12.70); Airbnb auto-reopened dates; page already published by another run (calendar-version 2026-10-23T20:58:30Z, men booked 18->17, am 4->5); file Oct23 4->5 to match page",
+   "nights": {
+    "2026-10-23": "4->5"
+   }
+  },
+  {
+   "at": "2026-10-24T09:27+02:00",
+   "what": "Jeronimo Santos Vieira HM3XJK82PD Male (9) Oct24-25 booked (Airbnb confirm 07:18:10Z, payout €10.50): men am -1 Oct24",
+   "nights": {
+    "2026-10-24": [
+     4,
+     3
+    ]
+   }
+  },
+  {
+   "at": "2026-10-24T11:58+02:00",
+   "what": "Mohamed Shousha HM9N4EXZC3 Male (1) Nov1-30 booked (Airbnb confirm 09:47:26Z, payout €271.71): men am -1 Nov1-29",
+   "nights": {
+    "2026-11-01": [
+     15,
+     14
+    ],
+    "2026-11-02": [
+     14,
+     13
+    ],
+    "2026-11-03": [
+     12,
+     11
+    ],
+    "2026-11-04": [
+     12,
+     11
+    ]
+   }
+  },
+  {
+   "at": "2026-10-24T12:16+02:00",
+   "what": "瀧澤 正太郎 HMKFSEEP9F Male (2) Oct24-25 booked (Airbnb confirm 10:12:04Z, payout €10.99): men am -1 Oct24 (page am synced to file)",
+   "nights": {
+    "2026-10-24": [
+     3,
+     2
+    ]
+   }
+  }
+ ]
+}
