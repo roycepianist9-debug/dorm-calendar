@@ -1,0 +1,83 @@
+{
+ "sha256": "c515f0e691258f33eceae258d6f7dff193821d490cf4e15d19f5a84893c9d129",
+ "bytes": 262522,
+ "label": "run59 Booking 6756773216 Ta Sangi + women Airbnb closed Nov 4-6",
+ "live_verified": true,
+ "stamp": "2026-10-26 09:55 Paris",
+ "frag_commit": "881b615",
+ "assemble_commit": "49ffe84",
+ "pages_trigger": "push deploy-touch 1f57726",
+ "gmail_watermark": "2026-10-26T08:10:41Z",
+ "pending_bookings": [],
+ "last_good_sha256": "0ab556c3749f1f841e3194130f99b47967e891b9773be907c4a0cb5f19e03ed6",
+ "last_good_at": "2026-10-26T09:55+01:00",
+ "last_commit": "fragments 881b615 -> assemble 49ffe84 -> deploy touch 1f57726 -> live verified",
+ "last_change": "Booking 6756773216 from extranet: Ta Sangi (India), 1 adult, Nov 4-7, total €46.07, comm €8.06, net ≈€38.01 (≈€12.67/n), payout by Nov 9; women Airbnb closed Nov 4/5/6 (wam 1->0)",
+ "onsale_rule": "see ONSALE_README.md",
+ "calendar_version": "2026-10-26T08:48:30Z",
+ "note_am_bm": "Oct 18 women 7/8 with wam 0/wbm 0 per page.",
+ "note_last_run": "2026-10-26 09:21 slot: no change (noise only: Spacefast connect mail, 2 Qonto Booking.com payouts)",
+ "pending_cancel_requests": [
+  {
+   "channel": "Booking",
+   "res": "6892838224",
+   "guest": "Harsh Premchand Gupta",
+   "side": "men",
+   "dates": "2026-11-03..2026-11-06",
+   "received": "2026-10-18T07:55:16Z",
+   "note": "guest asked free cancellation; Royce must answer within 12h; page unchanged until Booking confirms cancellation; repeat free-cancel request 2026-10-21T07:40:32Z + guest chaser msg 07:50:23Z (still pending, Royce to answer within 12h)"
+  },
+  {
+   "channel": "Booking",
+   "res": "5741411631",
+   "guest": "Liguori Francesca",
+   "side": "women",
+   "dates": "2026-10-19..2026-10-23",
+   "received": "2026-10-19T12:05:29Z",
+   "note": "guest message: flight cancelled by airline, asks for refund; not a Booking cancellation; page unchanged until Booking confirms cancellation"
+  },
+  {
+   "channel": "Booking",
+   "res": "5198162732",
+   "guest": "Hope Daly",
+   "side": "women",
+   "dates": "2026-10-20..2026-10-21",
+   "received": "2026-10-19T19:31:14Z",
+   "note": "guest asked free cancellation (1 night, EUR15.36; Booking told guest a fee applies); Royce must answer within 12h (by ~09:31 Paris Oct 20); page unchanged until Booking confirms cancellation"
+  },
+  {
+   "channel": "Booking",
+   "res": "5326052272",
+   "guest": "Palaiym Anlamassova",
+   "side": "men",
+   "dates": "2026-10-22..2026-10-23",
+   "received": "2026-10-21T09:09:51Z",
+   "note": "guest asked free cancellation (1 night, 3 rooms/beds, EUR41.78; Booking told guest a fee applies); Royce must answer within 12h (by ~23:10 Paris Oct 21); page unchanged until Booking confirms cancellation; 2026-10-23T15:14:26Z Booking CS reply to info request: if guest never arrived, host can mark no-show in extranet (not done yet)"
+  }
+ ],
+ "pending_modifications": [
+  {
+   "channel": "Booking",
+   "res": "6285792674",
+   "side": "men",
+   "original": "New booking 2026-09-15, arrival Mon 2026-10-26",
+   "modified_to_arrival": "2026-11-16",
+   "received": "2026-10-21T11:13:31Z",
+   "note": "mod mail carries no guest name/checkout; likely Ahmed Dkar Oct 26-29 (only Booking men's guest arriving Oct 26, who-list row has no res id), but Ahmed Dkar already has Nov 16-19 under Booking 5811024604; page unchanged until Royce/extranet confirms new dates"
+  }
+ ],
+ "sha": "ba196b1927ecd0f72bb80764f6c50057235810bf3bb7f6f05ec951406128077e",
+ "note": "box copy was stale (Oct 23); rebuilt from live page 665c6e80 with fallback watermark 2026-10-24 17:00Z",
+ "pending_change_requests": [
+  {
+   "channel": "Airbnb",
+   "res": "HM3RQD53YR",
+   "guest": "Rosanthan Pushparasa",
+   "side": "men",
+   "from": "2026-10-25..2026-10-29",
+   "requested": "2026-10-26..2026-10-30",
+   "received": "2026-10-25T10:58:59Z",
+   "note": "alteration request pending host decision; page keeps original dates until Airbnb confirms change"
+  }
+ ]
+}
