@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-27T14:44:40Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-10-27T21:08:02Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who is in</title>
 <script>window.dormGetLang=function(){var q=/[?&]lang=(fr|en)\b/.exec(location.search);if(q)return q[1];try{var s=localStorage.getItem("dormLang");if(s==="fr"||s==="en")return s;}catch(e){}return /^fr\b/i.test(navigator.language||"")?"fr":"en";};</script>
 <style>
@@ -123,7 +123,7 @@ body[data-dorm] .tonight{grid-template-columns:1fr}
 .n4-cash{margin:8px 0 0;padding:6px 0 0;border-top:1px solid #262b36;font-size:13px;color:#d4d4d8}
 .n4-cash .v{font-weight:800;font-size:15px;font-variant-numeric:tabular-nums}
 .n4-yes{color:#4ade80;font-weight:800}.n4-no{color:#f87171;font-weight:800}
-.n4-tonight{margin:14px 0 0;box-shadow:inset 3px 0 0 #22c55e}
+.n4-tonight{margin:14px 0 0;box-shadow:inset 3px 0 0 #22c55e}#n4-tonight .lin-top .n4-today{margin-left:8px}
 .n4-side{margin:8px 0 0;padding:8px 0 0;border-top:1px solid #262b36}
 .n4-side:first-of-type{border-top:none;padding-top:0}
 .n4-side h4{margin:0 0 4px;font-size:14px;font-weight:800}
@@ -333,6 +333,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
       hi.setAttribute("x", String(left + i * slot));
       hi.setAttribute("visibility", "visible");
     });
+    if (window.dormN4Sel) window.dormN4Sel(rows[i].d); /* daycard-1027: tapped day drives the Ce soir card */
   }
   function indexFromEvent(svg, ev) {
     if (!svg.createSVGPoint || !svg.getScreenCTM()) return -1;
@@ -1231,12 +1232,16 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
     });
   }
   /* ---- 2 + 4. tonight's arrivals / check-outs, Arrived ✓, No-show?, Auto-place ---- */
+  var SEL = null; /* daycard-1027 (Royce): day tapped in the bar chart; null = tonight */
+  window.dormN4Sel = function (d) { SEL = (!d || d === NIGHT) ? null : d; tonight(A.lang()); };
   function tonight(L) {
     var box = document.getElementById("n4-tonight"); if (!box) return; box.replaceChildren();
-    var i = idx(NIGHT);
-    var top = mk("div", "lin-top"); top.appendChild(mk("p", "lin-t", T[L].tn + " \u00b7 " + fmt(NIGHT, L))); box.appendChild(top);
+    var D = SEL || NIGHT, isT = D === NIGHT, i = idx(D);
+    var top = mk("div", "lin-top"); top.appendChild(mk("p", "lin-t", isT ? T[L].tn + " \u00b7 " + fmt(NIGHT, L) : fmt(D, L)));
+    if (!isT) { var bk = mk("button", "n4-b n4-today", "\u21A9 " + (L === "fr" ? "Aujourd\u2019hui" : "Today")); bk.type = "button"; bk.addEventListener("click", function () { SEL = null; tonight(A.lang()); }); top.appendChild(bk); }
+    box.appendChild(top);
     if (i < 1) { box.appendChild(mk("p", "lin-none", T[L].none)); return; }
-    var pastMid = NOW >= A.parisMs(A.addDay(NIGHT, 1), 0);
+    var pastMid = isT && NOW >= A.parisMs(A.addDay(NIGHT, 1), 0);
     [[0, "male", "m-only", T[L].men], [1, "female", "f-only", T[L].women]].forEach(function (S) {
       var side = S[0], now = names(rows[i], side), prev = names(rows[i - 1], side);
       var ins = diff(now, prev), outs = diff(prev, now);
@@ -1245,26 +1250,26 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
       sb.appendChild(mk("p", "n4-sub", T[L].arr));
       if (!ins.length) sb.appendChild(mk("p", "lin-none", T[L].none));
       ins.forEach(function (x) {
-        var li = mk("div", "n4-li"), on = isArr(NIGHT, side, x.n);
-        var bd = bedFor(side, x.n, NIGHT), nm = mk("span", "nm");
+        var li = mk("div", "n4-li"), on = isArr(D, side, x.n);
+        var bd = bedFor(side, x.n, D), nm = mk("span", "nm");
         if (bd) nm.appendChild(mk("b", "n5-bed", bedLbl(bd, L) + " \u00b7 "));
         nm.appendChild(document.createTextNode(x.n + " ")); nm.appendChild(mk("span", "sr", "(" + (T[L].src[x.s] || x.s) + ")"));
         var b = mk("button", "n4-b", on ? T[L].arrived : T[L].mark); b.type = "button"; b.setAttribute("aria-pressed", String(on));
         b.addEventListener("click", function () { toggleArr(NIGHT, side, x.n); });
-        li.append(nm, b);
+        if (isT) li.append(nm, b); else li.append(nm); /* Arrived? only for tonight */
         if (!on && pastMid) li.appendChild(mk("span", "n4-ns", T[L].ns));
         sb.appendChild(li);
       });
       sb.appendChild(mk("p", "n4-sub", T[L].out));
       if (!outs.length) sb.appendChild(mk("p", "lin-none", T[L].none));
-      else { var u = mk("ul", "lin-ul n8-plain"); outs.forEach(function (x) { var li = mk("li", null, x.n + " (" + (T[L].src[x.s] || x.s) + ")"); var bb = bedFor(side, x.n, NIGHT); if (bb) li.appendChild(mk("span", "n5-bed n9-bd", n9Bed(bb, L))); u.appendChild(li); }); sb.appendChild(u); }
+      else { var u = mk("ul", "lin-ul n8-plain"); outs.forEach(function (x) { var li = mk("li", null, x.n + " (" + (T[L].src[x.s] || x.s) + ")"); var bb = bedFor(side, x.n, D); if (bb) li.appendChild(mk("span", "n5-bed n9-bd", n9Bed(bb, L))); u.appendChild(li); }); sb.appendChild(u); }
       /* next5: the "last night, not marked arrived" list was removed (Royce 2026-10-18) */
       var tb = mk("div", "bm-tools"), pb = mk("button", null, T[L].place), msg = mk("span", "n4-msg"); pb.type = "button";
       pb.addEventListener("click", function () { autoPlace(side, i, L, msg); });
-      tb.append(pb, msg); sb.appendChild(tb);
+      tb.append(pb, msg); if (isT) sb.appendChild(tb);
       box.appendChild(sb);
     });
-    box.appendChild(mk("p", "capnote", T[L].grace));
+    if (isT) box.appendChild(mk("p", "capnote", T[L].grace));
   }
   function toggleArr(d, side, n) {
     var o = loadA(); o[d] = o[d] || {}; var k = side + ":" + n;
