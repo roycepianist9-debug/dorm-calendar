@@ -1,1 +1,1 @@
-500f03b0 2026-10-27T11:44Z Bed map audit: Violet F-8, Keti cleared, stale men beds freed
+9604fa55 2026-10-27T11:48Z Bed map audit: women built-in beds synced to saved map
