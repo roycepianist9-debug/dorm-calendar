@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-11-03T22:38:13Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-11-03T22:46:24Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who is in</title>
 <script>window.dormGetLang=function(){var q=/[?&]lang=(fr|en)\b/.exec(location.search);if(q)return q[1];try{var s=localStorage.getItem("dormLang");if(s==="fr"||s==="en")return s;}catch(e){}return /^fr\b/i.test(navigator.language||"")?"fr":"en";};</script>
 <style>
@@ -166,7 +166,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
 <p class="motto">“If everyone chips in, we’ll get there.”</p>
 <div id="n4-alert" aria-live="polite"></div>
 <h1>Who is in</h1>
-<p class="asof" id="n8-asof"><strong>As of 23:38 Paris, 06:38 Shanghai (2026-11-03).</strong></p>
+<p class="asof" id="n8-asof"><strong>As of 23:46 Paris, 06:46 Shanghai (2026-11-03).</strong></p>
 <p class="meta" id="n8-chk">Bed inventory refreshes about every 15 minutes. Last refreshed 03:20 Paris, 10:20 Shanghai (2026-11-03).</p>
 <p class="meta">Cash + Airbnb + 2 booking.com + Agoda</p>
 <div id="n8-bmbar"></div>
@@ -820,13 +820,14 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
       for (var b in SEED[r]) {
         var seedMs = SEED[r][b].T ? Date.parse(SEED[r][b].T) : seedMs0; /* per-bed force */
         var loc = s[r][b];
-        if (!loc || !(loc.t >= seedMs)) { var c = JSON.parse(JSON.stringify(SEED[r][b])); c.t = seedMs; s[r][b] = c; }
+        if (!loc) { var c = JSON.parse(JSON.stringify(SEED[r][b])); c.t = seedMs; s[r][b] = c; }
         else if (SEED[r][b].lb && !loc.lb && loc.n && loc.n === SEED[r][b].n) loc.lb = SEED[r][b].lb; /* capfix: same-name label stays display-only */
       }
     }
     return s;
   }
-  var state = mergeSeed(clean(load()));
+  var state = mergeSeed(clean(load())); /* 2026-11-03: built-in SEED is offline fallback only (fills beds with no saved/server value) */
+  window.dormBedReload = function () { state = mergeSeed(clean(load())); };
   function addDay(d, n) { var p = String(d).split("-"); var x = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2] + n)); return x.toISOString().slice(0, 10); }
   function rollover() {
     var ch = false;
@@ -1845,12 +1846,12 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
     var body = {message: msg, content: b64e(text), branch: BR}; if (sha) body.sha = sha;
     return fetch(API + path, {method: "PUT", headers: hdr(t), body: JSON.stringify(body)}).then(function (r) { if (!r.ok) { var e = new Error("write " + r.status); e.code = r.status; throw e; } return r.json(); });
   }
-  function rerender() { ["dormBedMapRender", "dormN4Render"].forEach(function (f) { try { if (window[f]) window[f](); } catch (e) {} }); }
+  function rerender() { try { if (window.dormBedReload) window.dormBedReload(); } catch (e) {} ["dormBedMapRender", "dormN4Render"].forEach(function (f) { try { if (window[f]) window[f](); } catch (e) {} }); }
   function apply(d) {
     /* merge, never wipe: per bed the newest edit (t) wins, beds only on this phone are kept */
     if (d.bedmap) { var L0 = j(KEYS[0]), R = d.bedmap; for (var rm in R) { L0[rm] = L0[rm] || {}; for (var bd in R[rm]) { var lv = L0[rm][bd], sv = R[rm][bd]; if (!lv || (sv && (sv.t || 0) >= (lv.t || 0))) L0[rm][bd] = sv; } } s(KEYS[0], JSON.stringify(L0)); }
     if (d.arrived) s(KEYS[1], JSON.stringify(merge(j(KEYS[1]), d.arrived)));
-    s(AT, d.savedAt || ""); s(DIRTY, ""); rerender();
+    var dz = g(DIRTY); s(AT, d.savedAt || ""); s(DIRTY, dz || ""); rerender(); /* 2026-11-03: server map always merged (newest t per bed), local unsaved flag kept */
   }
   var st, btn, busy = false;
   function paint(m) {
@@ -1863,7 +1864,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
     return tryFetch("https://royce-dorm-save.netlify.app/load?t=" + Date.now(), {}, 1).then(jsonOf)
       .catch(function () { return fetch("shared-edits.json?t=" + Date.now(), {cache: "no-store"}).then(function (r) { return r.ok ? r.json() : null; }); })
       .then(function (d) {
-        if (d && d.savedAt && d.savedAt !== g(AT) && !g(DIRTY)) apply(d);
+        if (d && (d.bedmap || d.arrived)) apply(d);
         paint();
       }).catch(function () { paint(); });
   }
