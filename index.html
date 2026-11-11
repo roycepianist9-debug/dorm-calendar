@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-11-10T21:36:53Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta http-equiv="Cache-Control" content="no-cache"><meta name="calendar-version" content="2026-11-11T08:37:02Z"><meta charset="utf-8"><style id="n6b-css">html{background:#0c0e12}html.n6-wait body{visibility:hidden}</style><script id="n6b-head">(function(){var d=document.documentElement;d.className+=" n6-wait";setTimeout(function(){d.className=d.className.replace(/ ?n6-wait/g,"")},2500);})();</script><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who is in</title>
 <script>window.dormGetLang=function(){var q=/[?&]lang=(fr|en)\b/.exec(location.search);if(q)return q[1];try{var s=localStorage.getItem("dormLang");if(s==="fr"||s==="en")return s;}catch(e){}return /^fr\b/i.test(navigator.language||"")?"fr":"en";};</script>
 <style>
@@ -166,7 +166,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
 <p class="motto">“If everyone chips in, we’ll get there.”</p>
 <div id="n4-alert" aria-live="polite"></div>
 <h1>Who is in</h1>
-<p class="asof" id="n8-asof"><strong>As of 22:36 Paris, 05:36 Shanghai (2026-11-09).</strong></p>
+<p class="asof" id="n8-asof"><strong>As of 09:37 Paris, 16:37 Shanghai (2026-11-11).</strong></p>
 <p class="meta" id="n8-chk">Bed inventory refreshes about every 15 minutes. Last refreshed 12:11 Paris, 19:11 Shanghai (2026-11-09).</p>
 <p class="meta">Cash + Airbnb + 2 booking.com + Agoda</p>
 <div id="n8-bmbar"></div>
@@ -778,7 +778,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
       "F-7": {"s": "in", "n": "Nelly PHILIP (staff)", "src": "C", "ci": "2026-10-16", "co": "2026-11-16", "T": "2026-11-03T22:45:00Z"},
       "F-8": {"s": "in", "n": "Vanessa Ruiz", "src": "A", "ci": "2026-10-28", "co": "2026-11-30", "T": "2026-11-03T22:45:00Z"}
     },
-    /* Royce's operational men's map of 2026-10-27 12:58 Paris (source of truth, replaces all earlier men's assignments). Beds 13, 18, 23 out of service (x: 1); bed 3 was empty -> Landry.
+    /* Royce's operational men's map of 2026-10-27 12:58 Paris (source of truth, replaces all earlier men's assignments). Beds 13, 18 still out of service in this built-in seed (x: 1); M-23 cleared 2026-11-11 (Royce 2026-11-03: all men's beds usable); bed 3 was empty -> Landry.
        src J = Airbnb (Joseph): staff Joseph's own Airbnb guests. co = check-out (from Royce's map). */
     "m-r0": {
       "M-1": {s: "in", n: "Christophe", src: "A", co: "2026-11-15", T: "2026-10-27T12:01:57Z"}, /* Royce map 2026-10-27 */
@@ -804,7 +804,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
     "m-r2": {
       "M-21": {s: "in", n: "David", src: "A", ci: "2026-10-25", co: "2026-10-30", T: "2026-10-27T12:01:57Z"}, /* Royce map 2026-10-27: calendar: Joseph David Wright HMTRP545CZ */
       "M-22": {s: "in", n: "Haji", src: "A", ci: "2026-10-26", co: "2026-10-30", T: "2026-10-27T12:01:57Z"}, /* Royce map 2026-10-27: Lidrissi (cash) left Oct 26, then Haji */
-      "M-23": {s: "free", x: 1},
+      "M-23": {s: "free"},
       "M-24": {s: "in", n: "Kamel", src: "C", co: "2026-11-17", T: "2026-10-27T12:01:57Z"}, /* Royce map 2026-10-27 */
       "M-25": {s: "in", n: "Karim", src: "A", ci: "2026-10-26", co: "2026-10-30", T: "2026-10-27T12:01:57Z"}, /* Royce map 2026-10-27 */
       "M-26": {s: "in", n: "Nader", src: "C", co: "2026-10-31", T: "2026-10-27T12:01:57Z"}, /* Royce map 2026-10-27 */
@@ -1497,7 +1497,7 @@ details.n6-fold[open]>summary:before{content:"\25BE"}
 (function () {
   var A = window.dormBedAPI, rows = window.dormN4Rows, same = window.dormN4Same, NIGHT = window.dormN4Night;
   if (!A || !rows || !same) return;
-  var NEVER = {"M-13": 1, "M-18": 1, "M-23": 1};
+  var NEVER = {"M-13": 1, "M-18": 1};
   var T = {en: {b: "Assign", q: "Assign these guests to random free beds?\n", none: "Every guest already has a bed.", full: " didn\u2019t fit (no free bed)", ok: "Assigned: ", bed: "Bed"},
            fr: {b: "Attribuer", q: "Attribuer ces clients \u00e0 des lits libres au hasard ?\n", none: "Tous les clients ont d\u00e9j\u00e0 un lit.", full: " sans lit libre", ok: "Attribu\u00e9s : ", bed: "Lit"}};
   var MSG = {};
